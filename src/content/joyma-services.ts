@@ -90,8 +90,9 @@ export const joymaServices = {
             heading: 'Already use Stripe?',
             paragraphs: [
                 'You can keep your Stripe login. Follow the same three steps, and when Stripe’s onboarding asks for your email, use the one you already sign in to Stripe with and sign in when prompted.',
-                'Joyma’s account is then added to your login, next to the account you already have. Switch between them from the account menu at the top of your Stripe Dashboard.',
-                'Your existing account carries on as before, with its payments, customers and payouts. Payments made through Joyma go to the new account, so you can always see which came from Joyma.',
+                'Stripe then offers to reuse the details from your existing account, such as your business information and bank account, so you mostly just confirm them. Stripe may still ask for anything that’s missing. Your business identity details then stay in sync across both accounts.',
+                'Joyma’s account is added to your login, next to the account you already have. Switch between them from the account menu at the top of your Stripe Dashboard.',
+                'We create a separate account on purpose. Your existing account carries on as before, with its payments, customers and payouts, and Joyma never gets access to it. Payments made through Joyma go to the new account, so they don’t mix with the rest of your business and you can always see which came from Joyma.',
             ],
         },
         participants: {
@@ -108,6 +109,8 @@ export const joymaServices = {
                 '<strong>Straight to your center.</strong> Payments go into your center’s own Stripe account, and Stripe pays them out to your bank account. Joyful Effort never holds your center’s money.',
                 '<strong>No Joyma fee on payments.</strong> Joyma doesn’t take a cut. Stripe charges its standard processing fees, which depend on your country and the payment method.',
                 '<strong>Your account, your records.</strong> Your center owns its Stripe account. You can see every payment, refund and payout in Stripe’s dashboard as well as in Joyma.',
+                '<strong>Joyma only sees its own account.</strong> Joyma works only with the Stripe account it creates for your center. It never gets access to any other Stripe account you have, or to its customers and payments.',
+                '<strong>Identity checks stay with Stripe.</strong> Stripe asks for and verifies your center’s details on its own secure pages. Payment providers must do this for anyone who receives payments.',
             ],
         },
     },

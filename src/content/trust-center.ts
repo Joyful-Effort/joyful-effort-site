@@ -1,7 +1,7 @@
 /**
  * Trust Center copy — Paul's draft (JE_Website_05_Trust_Centre, 22 Oct 2026), with every answer
  * fact-checked and agreed item by item in lotus `docs/Knowledge/trust-center/Trust-Center-TODO.md`
- * (27–28 Oct 2026). Update that file and this one together: the page makes factual claims about
+ * (27–28 Oct 2026; updated 15 Nov 2026). Update that file and this one together: the page makes factual claims about
  * hosting, providers, security and certification that must stay true.
  */
 import { mailto, routes, type SiteLink } from './site';
@@ -77,7 +77,7 @@ export const trustCenter = {
         paragraphs: [
             'Choosing software means entrusting it with part of your center’s everyday work—and the information your community shares with you. Here you can explore Joyful Effort’s approach to security, privacy and reliable service, and find the information your team needs to assess Joyma.',
         ],
-        lastUpdated: 'Last updated 29 October 2026',
+        lastUpdated: 'Last updated 15 November 2026',
         notice: legalReview,
     },
     sections: [
@@ -114,6 +114,7 @@ export const trustCenter = {
                     question: 'What happens if the service is interrupted?',
                     answer: [
                         '<strong>We watch the service.</strong> Joyma’s servers are monitored, and our technical team is alerted when something stops working.',
+                        '<strong>Backups we’ve tested.</strong> Joyma’s database, uploaded files and sign-in system are backed up every night. Backups are encrypted and kept in the EU, separately from the live servers. In November 2026 we restored the whole service from backup onto a new server to prove it works, and we repeat that test every quarter.',
                         '<strong>Keeping you informed.</strong> If Joyma is interrupted, we’ll email your center’s administrators and keep you updated until it’s resolved. We give advance notice of planned maintenance.',
                         '<strong>Your records are always yours.</strong> Your center can export its records at any time. If Joyma ever closes, we’ll give you advance notice and time to take your data with you.',
                         '<strong>Our commitments.</strong> Availability, support response times and recovery targets will be set out in the terms for centers, which are in legal review.',
@@ -246,7 +247,7 @@ export const trustCenter = {
                     answer: [
                         '<strong>Cyber Essentials — Certified.</strong> Joyful Effort is certified under Cyber Essentials, the UK government-backed scheme for protection against common cyber attacks. The certification covers our whole organization, including the servers and cloud services that run Joyma. Certified 20 October 2026 · Renewal due 20 October 2027 · Certification body: Unity Metrix (IASME) · Certificate number 1a519dc5-fc19-416b-9680-4baf85188b41.',
                         'Cyber Essentials confirms that five baseline controls are in place: firewalls, secure configuration, access control, malware protection and security updates. It is an independently reviewed self-assessment. It is not an audit of Joyma’s features or a penetration test.',
-                        '<strong>Independent security review — September 2026.</strong> Ciberseguridad720, an independent cybersecurity firm we commissioned, tested Joyma’s sign-in, account and server security. Every issue they found has been fixed. A summary of the review is available on request.',
+                        '<strong>Independent security review — September 2026.</strong> Ciberseguridad720, an independent cybersecurity firm we commissioned, tested Joyma’s sign-in, account and server security. We have fixed every issue they rated low risk or higher, and asked them to retest our fixes. One informational finding, about how the sign-in screen responds to unknown email addresses, is scheduled for after launch. A summary of the review is available on request.',
                         '<strong>Planned.</strong> We plan to consider Cyber Essentials Plus, which adds hands-on testing by an external assessor, in 2027. We’ll list it here only once it’s completed.',
                     ],
                     links: [
@@ -352,7 +353,7 @@ export const trustCenter = {
     },
     providers: {
         heading: 'Service providers',
-        lastUpdated: 'Last updated 28 October 2026',
+        lastUpdated: 'Last updated 15 November 2026',
         intro: [
             'These are the companies that can handle information from Joyma, what they do for us and where. We run the database, file storage, search and sign-in ourselves on our own servers, so they aren’t separate companies here.',
             'We’ll tell centers before we add or replace a provider that handles their information.',
@@ -366,9 +367,10 @@ export const trustCenter = {
         items: [
             {
                 name: 'Hetzner (Hetzner Online GmbH)',
-                purpose: 'Hosts our servers: the app, database, files, search and sign-in system',
+                purpose:
+                    'Hosts our servers (the app, database, files, search and sign-in system) and our encrypted backups',
                 information: 'Everything stored in Joyma',
-                location: 'Helsinki, Finland (EU)',
+                location: 'Helsinki, Finland (EU); backups in the EU',
             },
             {
                 name: 'MetaProvide',

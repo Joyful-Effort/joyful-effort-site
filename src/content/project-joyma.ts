@@ -62,6 +62,16 @@ export const projectJoyma = {
             'Center teams change, and knowledge needs to carry across those changes. Joyma is being designed with an intuitive administration experience and easy access to data, helping staff and volunteers share the work.',
         ],
     },
+    websiteLabel: 'Website integration',
+    website: {
+        heading: 'Works with your existing website',
+        paragraphs: [
+            'You don’t need to replace your website. You manage your events once in Joyma, and they appear on your center’s own site, always up to date.',
+            'There will be two ways to do this. A simple widget you paste into a page lists your upcoming events in your center’s colors. For centers with a web developer, a read-only connection lets your site show events in its own design.',
+            'When someone registers, pays or signs in, they continue on Joyma. Their bookings, payments and course history stay together in one account, and no personal or payment details are entered on your website, which keeps things simpler and safer for your center and your participants.',
+            'Website integration is being built now with our first partner center.',
+        ],
+    },
     inPractice: {
         heading: 'See Joyma in practice',
         paragraphs: [
@@ -122,7 +132,7 @@ export const projectJoyma = {
                     {
                         question: 'Can we keep our existing website and tools?',
                         answer: [
-                            'Yes, we’re designing Joyma to be a piece of software that can easily integrate with your current website. As for your existing tools, Joyma is designed as an all-in-one platform and should meet the needs of your current tech stack in one piece of software – anything we haven’t covered? Drop us a line, let us know and we can add features and ideas to our roadmap.',
+                            'Yes. Your events can appear on your current website, through a simple widget or a connection your web developer sets up, while registration and payment happen on Joyma. As for your existing tools, Joyma is designed as an all-in-one platform and should meet the needs of your current tech stack in one piece of software – anything we haven’t covered? Drop us a line, let us know and we can add features and ideas to our roadmap.',
                         ],
                         links: [],
                     },

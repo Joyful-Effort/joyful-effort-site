@@ -43,12 +43,13 @@ function dividers(index: number) {
                         <HandRule variant={index} class:list={['top-0 left-0', rule.top]} />
                         <HandRule orientation="vertical" variant={index + 1} class:list={['top-0 left-0', rule.left]} />
                         {center.logo ? (
-                            <Image
-                                src={center.logo}
-                                alt=""
-                                width={160}
-                                class="h-16 w-auto max-w-[10rem] object-contain object-left"
-                            />
+                            <div class="flex h-16 items-center">
+                                <Image
+                                    src={center.logo}
+                                    alt=""
+                                    class="h-full w-auto max-w-full object-contain object-left"
+                                />
+                            </div>
                         ) : (
                             <div
                                 class="flex h-16 w-16 items-center justify-center border-2 border-dashed border-navy/35 text-xs font-medium tracking-wide text-navy/60 uppercase"

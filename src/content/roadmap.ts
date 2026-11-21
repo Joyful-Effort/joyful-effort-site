@@ -5,6 +5,11 @@
  */
 
 import type { ImageMetadata } from 'astro';
+import chandrakirtiLogo from '@/assets/centers/chandrakirti.png';
+import ivyLogo from '@/assets/centers/institut-vajra-yogini.png';
+import jamyangLogo from '@/assets/centers/jamyang-london.svg';
+import shantidevaLogo from '@/assets/centers/shantideva.png';
+import tnlLogo from '@/assets/centers/thubten-norbu-ling.svg';
 import { routes } from './site';
 
 export const roadmap = {
@@ -54,13 +59,25 @@ export const roadmap = {
     participatingCenters: {
         heading: 'Centers testing Joyma',
         intro: 'These centers are exploring Joyma in our test environment and sharing what works for their communities.',
-        // `logo` is added per center once we have each center's logo and permission to use it.
+        // Logos are used with each center's permission. A center without `logo` shows a placeholder.
         centers: [
-            { name: 'Jamyang Buddhist Center London', country: 'United Kingdom' },
-            { name: 'Shantideva Center', country: 'United States' },
-            { name: 'The Buddhist Center Thubten Norbu Ling', country: 'United States' },
-            { name: 'Institut Vajra Yogini', country: 'France' },
-            { name: 'Chandrakirti Meditation Center', country: 'New Zealand' },
+            {
+                name: 'Jamyang Buddhist Center London',
+                country: 'United Kingdom',
+                logo: jamyangLogo,
+            },
+            { name: 'Shantideva Center', country: 'United States', logo: shantidevaLogo },
+            {
+                name: 'The Buddhist Center Thubten Norbu Ling',
+                country: 'United States',
+                logo: tnlLogo,
+            },
+            { name: 'Institut Vajra Yogini', country: 'France', logo: ivyLogo },
+            {
+                name: 'Chandrakirti Meditation Center',
+                country: 'New Zealand',
+                logo: chandrakirtiLogo,
+            },
         ] as { name: string; country: string; logo?: ImageMetadata }[],
         invitation: {
             heading: 'Could your center test Joyma?',

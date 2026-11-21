@@ -43,7 +43,7 @@ export const about = {
     centers: {
         heading: 'Centers helping shape Joyma',
         paragraphs: [
-            'The perspective of center teams is central to Joyma. Understanding how programs work in practice helps us build tools that are useful in everyday center life. Jamyang Buddhist Centre London (UK), Shantideva Center (USA), The Buddhist Center Thubten Norbu Ling (USA), Institut Vajra Yogini (France) and Chandrakirti Meditation Center (New Zealand) are currently supporting the project.',
+            'The perspective of center teams is central to Joyma. Understanding how programs work in practice helps us build tools that are useful in everyday center life. Jamyang Buddhist Center London (UK), Shantideva Center (USA), The Buddhist Center Thubten Norbu Ling (USA), Institut Vajra Yogini (France) and Chandrakirti Meditation Center (New Zealand) are currently supporting the project.',
         ],
     },
     funding: {

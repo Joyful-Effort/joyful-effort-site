@@ -17,6 +17,8 @@ const canonical = new URL('/seeds', Astro.site);
 const sessions = sessionViews();
 const buildTime = Date.now();
 const nextNumber = sessions.find((s) => s.end.getTime() > buildTime)?.number;
+// Section 1 shows the usual local times, taken from the next session (or the last listed one).
+const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[sessions.length - 1]).times;
 ---
 
 <!doctype html>
@@ -209,7 +211,7 @@ const nextNumber = sessions.find((s) => s.end.getTime() > buildTime)?.number;
   }
   .next-eyebrow{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--muted-foreground);margin-bottom:6px}
   .next-date{font-size:clamp(22px,3vw,28px);font-weight:600;letter-spacing:-.015em;line-height:1.2;color:var(--foreground);margin-bottom:14px}
-  .next .tz small{font-size:12px;margin-left:3px}
+  .tz small{font-size:12px;margin-left:3px}
   .next .actions{margin-top:18px}
   .next-note{margin-top:14px;font-size:14px;color:var(--text-muted)}
   .addcal{position:relative}
@@ -362,14 +364,13 @@ const nextNumber = sessions.find((s) => s.end.getTime() > buildTime)?.number;
     <div class="wrap">
       <header class="sechead">
         <div class="eyebrow"><span class="secnum">1</span> <h2>Monthly Meeting: every 1st Wednesday</h2> </div>
-        
+        <p class="sub">The monthly meeting is a gathering to share what we have built and changed, including updates based on your feedback, and to hear more of your insights about digital work and service at Dharma centers.</p>
       </header>
 
       <div class="tzrow">
-        <span class="tz"><b>16:00</b> London &middot; Lisbon</span>
-        <span class="tz"><b>17:00</b> Paris &middot; Madrid</span>
-        <span class="tz"><b>11:00</b> New York</span>
-        <span class="tz"><b>09:00</b> Santa Fe</span>
+        {usualTimes.map((t) => (
+          <span class="tz"><b>{t.time}</b> {t.label}{t.nextDay && <small>(Thursday)</small>}</span>
+        ))}
       </div>
 
       <p class="note prose">From December the meeting has a new link, below. The time stays the same, and every session is recorded.</p>

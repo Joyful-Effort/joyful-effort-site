@@ -2,6 +2,7 @@
 import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 import '@fontsource/dm-sans/600.css';
+import { comingNext, delivered, type RoadmapGate } from '@/content/joyma-roadmap';
 
 /**
  * The Joyma Seeds hub: the home page for the pilot centers between monthly meetings.
@@ -11,6 +12,12 @@ const title = 'Joyma Seeds — everything in one place';
 const description =
     'Joyma Seeds: meeting times, the test environment, what to test this month, where we need your input, past presentations and contacts.';
 const canonical = new URL('/seeds', Astro.site);
+
+// The roadmap tables come from the shared roadmap, which also feeds the public roadmap page.
+const badgeClass = (gate: RoadmapGate) =>
+    gate.badge === 'plain' ? 'badge' : `badge ${gate.badge}`;
+const gateDetail = (gate: RoadmapGate) =>
+    gate.title ? `<strong>${gate.title}</strong> &mdash; ${gate.detail}` : gate.detail;
 ---
 
 <!doctype html>
@@ -440,11 +447,9 @@ const canonical = new URL('/seeds', Astro.site);
           <table>
             <thead><tr><th>Gate</th><th>Status</th><th>What it covers</th></tr></thead>
             <tbody>
-              <tr><td class="nw"><strong>Gate A</strong></td><td class="nw"><span class="badge soft">Done</span></td><td><strong>Events &amp; registration</strong> &mdash; events, sessions, recurring events, registration and check-in.</td></tr>
-              <tr><td class="nw"><strong>Gate B</strong></td><td class="nw"><span class="badge soft">Done</span></td><td><strong>Courses &amp; members</strong> &mdash; Moodle with single sign-in, and the membership foundation.</td></tr>
-              <tr><td class="nw"><strong>Gate C</strong></td><td class="nw"><span class="badge soft">Done</span></td><td><strong>Memberships &amp; more</strong> &mdash; email, search, directories, self-service and the public pages.</td></tr>
-              <tr><td class="nw"><strong>Gate D</strong></td><td class="nw"><span class="badge soft">Done</span></td><td><strong>Payments &amp; security</strong> &mdash; the first version of payments and the security review.</td></tr>
-              <tr><td class="nw"><strong>Gate E</strong></td><td class="nw"><span class="badge soft">Done</span></td><td><strong>Payments closed</strong> &mdash; refunds, payment links, invoices and receipts; memberships rebuilt from your feedback; Study spaces.</td></tr>
+              {delivered.map((gate) => (
+                <tr><td class="nw"><strong>{gate.gate}</strong></td><td class="nw"><span class={badgeClass(gate)}>{gate.status}</span></td><td set:html={gateDetail(gate)} /></tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -456,9 +461,9 @@ const canonical = new URL('/seeds', Astro.site);
           <table>
             <thead><tr><th>Gate</th><th>Status</th><th>What it covers</th></tr></thead>
             <tbody>
-              <tr><td class="nw"><strong>Gate F</strong></td><td class="nw"><span class="badge solid">December</span></td><td><strong>Your website, and how your teaching is organized</strong> &mdash; events on your own website, with registration and payment without leaving it; event types, categories, tags and a calendar view, shaped with Maile&rsquo;s design input.</td></tr>
-              <tr><td class="nw"><strong>Gate G</strong></td><td class="nw"><span class="badge">End of December</span></td><td><strong>Donations and privacy</strong> &mdash; donations, including an optional donation at checkout, and GDPR features: accepting terms, closing an account, getting a copy of your data.</td></tr>
-              <tr><td class="nw"><strong>Later</strong></td><td class="nw"><span class="badge">On the list</span></td><td>Study programs, duplicating events and templates, importing existing data, network-wide search, and a mobile app.</td></tr>
+              {comingNext.map((gate) => (
+                <tr><td class="nw"><strong>{gate.gate}</strong></td><td class="nw"><span class={badgeClass(gate)}>{gate.status}</span></td><td set:html={gateDetail(gate)} /></tr>
+              ))}
             </tbody>
           </table>
         </div>

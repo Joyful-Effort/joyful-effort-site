@@ -10,6 +10,7 @@ import ivyLogo from '@/assets/centers/institut-vajra-yogini-horizontal.png';
 import jamyangLogo from '@/assets/centers/jamyang-london.svg';
 import shantidevaLogo from '@/assets/centers/shantideva.png';
 import tnlLogo from '@/assets/centers/thubten-norbu-ling.svg';
+import { publicInDevelopment, publicRecentProgress } from './joyma-roadmap';
 import { routes, type SiteLink } from './site';
 
 export const roadmap = {
@@ -87,32 +88,14 @@ export const roadmap = {
     },
     /**
      * The three-column block below the pilot features: each column lists items or offers a link.
-     * Items are summarized from the partner (Seeds) roadmap, without dates.
+     * Items come from the shared roadmap (joyma-roadmap.ts), which also drives the Seeds page.
      */
     nextSteps: [
         {
             id: 'in-development',
             heading: 'In development',
             text: 'What we’re building now, before it’s ready for centers to test.',
-            items: [
-                {
-                    title: 'A redesigned admin experience',
-                    text: 'Simpler screens for creating events and memberships, followed by the participant side.',
-                },
-                {
-                    title: 'Events on your own website',
-                    text: 'Registration and payment without leaving your center’s site.',
-                },
-                {
-                    title: 'Organizing your program',
-                    text: 'Event types, categories, tags and a calendar view.',
-                },
-                { title: 'Donations', text: 'Including an optional donation at checkout.' },
-                {
-                    title: 'Privacy tools',
-                    text: 'Accepting terms, closing an account and getting a copy of your data.',
-                },
-            ],
+            items: publicInDevelopment,
         },
         {
             id: 'feature-requests',
@@ -124,24 +107,7 @@ export const roadmap = {
             id: 'recent-progress',
             heading: 'Recent progress',
             text: 'Recently completed with our partner centers.',
-            items: [
-                {
-                    title: 'Payments',
-                    text: 'Card payments through Stripe, with refunds, payment links, invoices and receipts.',
-                },
-                {
-                    title: 'Memberships rebuilt',
-                    text: 'Reworked based on feedback from our partner centers.',
-                },
-                {
-                    title: 'Study spaces',
-                    text: 'A place for students to keep their Dharma study resources and prayer materials, and track their attendance at teachings.',
-                },
-                {
-                    title: 'Security',
-                    text: 'A security review, and Cyber Essentials certification.',
-                },
-            ],
+            items: publicRecentProgress,
         },
     ] as {
         id: string;

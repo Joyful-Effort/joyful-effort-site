@@ -85,13 +85,34 @@ export const roadmap = {
             link: { label: 'Inquire for your center', href: routes.centerInquiry },
         },
     },
-    /** The three-column block below the pilot features. `status` shows instead of a link. */
+    /**
+     * The three-column block below the pilot features: each column lists items or offers a link.
+     * Items are summarized from the partner (Seeds) roadmap, without dates.
+     */
     nextSteps: [
         {
             id: 'in-development',
             heading: 'In development',
-            text: 'Features we’re building now, before they’re ready for centers to test. We’ll list them here as they take shape.',
-            status: 'Updates coming soon',
+            text: 'What we’re building now, before it’s ready for centers to test.',
+            items: [
+                {
+                    title: 'A redesigned admin experience',
+                    text: 'Simpler screens for creating events and memberships, followed by the participant side.',
+                },
+                {
+                    title: 'Events on your own website',
+                    text: 'Registration and payment without leaving your center’s site.',
+                },
+                {
+                    title: 'Organizing your program',
+                    text: 'Event types, categories, tags and a calendar view.',
+                },
+                { title: 'Donations', text: 'Including an optional donation at checkout.' },
+                {
+                    title: 'Privacy tools',
+                    text: 'Accepting terms, closing an account and getting a copy of your data.',
+                },
+            ],
         },
         {
             id: 'feature-requests',
@@ -102,8 +123,27 @@ export const roadmap = {
         {
             id: 'recent-progress',
             heading: 'Recent progress',
-            text: 'What’s changed in Joyma recently, as new features move into testing with our partner centers.',
-            status: 'Updates coming soon',
+            text: 'Recently completed with our partner centers.',
+            items: [
+                {
+                    title: 'Payments',
+                    text: 'Card payments through Stripe, with refunds, payment links, invoices and receipts.',
+                },
+                {
+                    title: 'Memberships rebuilt',
+                    text: 'Reworked based on feedback from our partner centers.',
+                },
+                {
+                    title: 'Security',
+                    text: 'A security review, and Cyber Essentials certification.',
+                },
+            ],
         },
-    ] as { id: string; heading: string; text: string; status?: string; link?: SiteLink }[],
+    ] as {
+        id: string;
+        heading: string;
+        text: string;
+        items?: { title: string; text: string }[];
+        link?: SiteLink;
+    }[],
 };

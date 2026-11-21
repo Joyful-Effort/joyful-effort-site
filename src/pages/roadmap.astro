@@ -53,7 +53,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     </Section>
 
     <Section tone="light">
-        <div class="grid gap-8 md:grid-cols-3" data-reveal-group>
+        <div class="grid gap-8 md:grid-cols-3 md:items-start" data-reveal-group>
             {
                 roadmap.nextSteps.map((step, index) => (
                     <HandFrame variant={index}>
@@ -62,16 +62,27 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
                                 {step.heading}
                             </h2>
                             <p class="mt-4">{step.text}</p>
-                            <div class="mt-auto pt-7">
-                                {step.link ? (
+                            {step.items && (
+                                <ul class="mt-6 space-y-4">
+                                    {step.items.map((item) => (
+                                        <li class="flex gap-3">
+                                            <span
+                                                class="mt-[0.55em] h-2 w-2 shrink-0 rounded-full bg-coral"
+                                                aria-hidden="true"
+                                            />
+                                            <p>
+                                                <strong class="font-semibold">{item.title}</strong>
+                                                <span class="block">{item.text}</span>
+                                            </p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                            {step.link && (
+                                <div class="mt-7">
                                     <Button href={step.link.href}>{step.link.label}</Button>
-                                ) : (
-                                    <p class="inline-flex items-center gap-2 text-sm font-medium">
-                                        <span class="h-2 w-2 rounded-full bg-coral" aria-hidden="true" />
-                                        {step.status}
-                                    </p>
-                                )}
-                            </div>
+                                </div>
+                            )}
                         </article>
                     </HandFrame>
                 ))

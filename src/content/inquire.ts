@@ -3,9 +3,9 @@
  * Centers use the center inquiry form (center-inquiry.ts).
  */
 export const inquire = {
-    heading: 'Ask us a question',
+    heading: 'Send us a message',
     paragraphs: [
-        'Have a question about Joyma or Joyful Effort, or an idea you would like to share? Send us a message and we’ll get back to you.',
+        'Questions, feature requests, feedback, or just a hello and a catch-up: we’d love to hear from you. We’ll get back to you.',
     ],
     centerPointer: {
         text: 'Inquiring on behalf of a Dharma center? The center inquiry form lets you tell us more about your center.',

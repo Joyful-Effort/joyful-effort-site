@@ -6,7 +6,7 @@
 
 import type { ImageMetadata } from 'astro';
 import chandrakirtiLogo from '@/assets/centers/chandrakirti.png';
-import ivyLogo from '@/assets/centers/institut-vajra-yogini.png';
+import ivyLogo from '@/assets/centers/institut-vajra-yogini-emblem.png';
 import jamyangLogo from '@/assets/centers/jamyang-london.svg';
 import shantidevaLogo from '@/assets/centers/shantideva.png';
 import tnlLogo from '@/assets/centers/thubten-norbu-ling.svg';

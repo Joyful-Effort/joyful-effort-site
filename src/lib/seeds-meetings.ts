@@ -13,7 +13,7 @@ export const MEETING = {
     startTime: '16:00',
     durationMinutes: 60,
     description:
-        'Our monthly Joyma Seeds meeting: a one-hour structured session where we demo updates and new features and go through your feedback. If you would like to stay on and chat afterwards, we are always happy to. Every session is recorded.',
+        'Our monthly Joyma Seeds meeting: a one-hour structured session where we demo updates and new features and go through your feedback. If you would like to stay on and chat afterwards, we are always happy to. Every session is recorded, so we don’t miss any of your helpful feedback.',
 };
 
 export const SESSIONS: { number: number; date: string }[] = [

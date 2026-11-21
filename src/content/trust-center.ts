@@ -77,7 +77,7 @@ export const trustCenter = {
         paragraphs: [
             'Choosing software means entrusting it with part of your center’s everyday work—and the information your community shares with you. Here you can explore Joyful Effort’s approach to security, privacy and reliable service, and find the information your team needs to assess Joyma.',
         ],
-        lastUpdated: 'Last updated 29 October 2026',
+        lastUpdated: 'Last updated October 29, 2026',
         notice: legalReview,
     },
     sections: [
@@ -244,7 +244,7 @@ export const trustCenter = {
                 {
                     question: 'Certifications, audits & supporting evidence',
                     answer: [
-                        '<strong>Cyber Essentials — Certified.</strong> Joyful Effort is certified under Cyber Essentials, the UK government-backed scheme for protection against common cyber attacks. The certification covers our whole organization, including the servers and cloud services that run Joyma. Certified 20 October 2026 · Renewal due 20 October 2027 · Certification body: Unity Metrix (IASME) · Certificate number 1a519dc5-fc19-416b-9680-4baf85188b41.',
+                        '<strong>Cyber Essentials — Certified.</strong> Joyful Effort is certified under Cyber Essentials, the UK government-backed scheme for protection against common cyber attacks. The certification covers our whole organization, including the servers and cloud services that run Joyma. Certified October 20, 2026 · Renewal due October 20, 2027 · Certification body: Unity Metrix (IASME) · Certificate number 1a519dc5-fc19-416b-9680-4baf85188b41.',
                         'Cyber Essentials confirms that five baseline controls are in place: firewalls, secure configuration, access control, malware protection and security updates. It is an independently reviewed self-assessment. It is not an audit of Joyma’s features or a penetration test.',
                         '<strong>Independent security review — September 2026.</strong> Ciberseguridad720, an independent cybersecurity firm we commissioned, tested Joyma’s sign-in, account and server security. Every issue they found has been fixed. A summary of the review is available on request.',
                         '<strong>Planned.</strong> We plan to consider Cyber Essentials Plus, which adds hands-on testing by an external assessor, in 2027. We’ll list it here only once it’s completed.',
@@ -352,7 +352,7 @@ export const trustCenter = {
     },
     providers: {
         heading: 'Service providers',
-        lastUpdated: 'Last updated 28 October 2026',
+        lastUpdated: 'Last updated October 28, 2026',
         intro: [
             'These are the companies that can handle information from Joyma, what they do for us and where. We run the database, file storage, search and sign-in ourselves on our own servers, so they aren’t separate companies here.',
             'We’ll tell centers before we add or replace a provider that handles their information.',

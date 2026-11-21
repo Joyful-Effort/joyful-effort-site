@@ -11,7 +11,7 @@ export const projectJoyma = {
         paragraphs: [
             'Joyma is our first project: a platform that brings center administration together with a shared network for discovering teachings and events.',
             'We’re developing it with Dharma centers to make everyday administration easier, support continuity across teams and help more people find what centers offer.',
-            'We’re currently working with our ‘Joyma Seed’ partners; centers who are helping us develop the project based on their communities’ needs. If you and your center are interested in becoming a Joyma development partner, we’d love to hear from you.',
+            'We’re currently working with our “Joyma Seed” partners; centers who are helping us develop the project based on their communities’ needs. If you and your center are interested in becoming a Joyma development partner, we’d love to hear from you.',
         ],
         links: [
             { label: 'View the roadmap', href: routes.roadmap },

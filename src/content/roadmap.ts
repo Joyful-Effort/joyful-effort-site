@@ -14,7 +14,7 @@ export const roadmap = {
     },
     pilot: {
         heading: 'Ready for pilot testing',
-        intro: 'The following features are ready for participating centers to explore in our test environment. Some processes still need support from the Joyful Effort team, and payments are not yet available.',
+        intro: 'The following features are ready for participating centers to explore in our test environment.',
         items: [
             {
                 heading: 'Center accounts and team access',
@@ -38,7 +38,7 @@ export const roadmap = {
             },
             {
                 heading: 'Membership management',
-                text: 'Centers can create membership plans, define benefits and manage member records. Members can pause, resume, cancel or change their plan, and membership benefits can apply during event registration. Membership sign-up and payment are still awaiting the payments work.',
+                text: 'Centers can create membership plans, define benefits and manage member records. Members can pause, resume, cancel or change their plan, and membership benefits can apply during event registration.',
                 illustration: 'generosity',
             },
             {

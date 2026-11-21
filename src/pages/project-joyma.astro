@@ -1,5 +1,4 @@
 ---
-import ComingSoon from '@/components/ComingSoon.astro';
 import FaqItem from '@/components/FaqItem.astro';
 import HandFrame from '@/components/HandFrame.astro';
 import HandRule from '@/components/HandRule.astro';
@@ -25,9 +24,9 @@ const { faq } = projectJoyma;
         paragraphs={projectJoyma.hero.paragraphs}
         links={projectJoyma.hero.links}
     >
-        <HandFrame slot="media" offset variant={2} class="bg-sunshine">
+        <HandFrame slot="media" offset variant={2} class="bg-navy">
             <div class="flex aspect-[4/3] items-center justify-center p-10">
-                <Illustration name="laptop-admin" class="max-w-[16rem]" loading="eager" />
+                <Illustration name="laptop-admin-light" class="max-w-[16rem]" loading="eager" />
             </div>
         </HandFrame>
     </SplitHero>
@@ -73,11 +72,6 @@ const { faq } = projectJoyma;
         illustration="volunteers"
         variant={1}
     />
-
-    <Section tone="light" innerClass="grid items-center gap-10 md:grid-cols-2 md:gap-16">
-        <TextBlock heading={projectJoyma.inPractice.heading} paragraphs={projectJoyma.inPractice.paragraphs} />
-        <ComingSoon text={projectJoyma.inPractice.comingSoon} />
-    </Section>
 
     <Section tone="navy">
         <TextBlock

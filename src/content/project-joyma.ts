@@ -14,7 +14,6 @@ export const projectJoyma = {
             'We’re currently working with our ‘Joyma Seed’ partners; centers who are helping us develop the project based on their communities’ needs. If you and your center are interested in becoming a Joyma development partner, we’d love to hear from you.',
         ],
         links: [
-            { label: 'Inquire about Joyma', href: routes.centerInquiry },
             { label: 'View the roadmap', href: routes.roadmap },
             { label: 'Visit joyma.co', href: joymaSite },
         ],
@@ -61,13 +60,6 @@ export const projectJoyma = {
         paragraphs: [
             'Center teams change, and knowledge needs to carry across those changes. Joyma is being designed with an intuitive administration experience and easy access to data, helping staff and volunteers share the work.',
         ],
-    },
-    inPractice: {
-        heading: 'See Joyma in practice',
-        paragraphs: [
-            'Take a look at how Joyma is being developed for center teams and the people exploring their programs.',
-        ],
-        comingSoon: 'Coming soon!',
     },
     gettingStarted: {
         heading: 'Getting started',

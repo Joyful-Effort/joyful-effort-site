@@ -6,6 +6,7 @@ const files = import.meta.glob<{ default: ImageMetadata }>('../assets/illustrati
 
 export type IllustrationName =
     | 'laptop-admin'
+    | 'laptop-admin-light'
     | 'event-planning'
     | 'prayer-book'
     | 'butter-lamp'

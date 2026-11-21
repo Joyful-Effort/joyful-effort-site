@@ -111,4 +111,20 @@
         pointer-events: none;
         overflow: visible;
     }
+
+    /* Trust Center section bar: pinned below the sticky site header (height set by script). */
+    .trust-subnav {
+        top: var(--header-h, 5.375rem);
+    }
+
+    @media (min-width: 48rem) {
+        .trust-subnav {
+            top: var(--header-h, 6.5625rem);
+        }
+    }
+
+    /* Jumping to a Trust Center section clears both the header and the section bar. */
+    .trust-anchor {
+        scroll-margin-top: calc(var(--header-h, 6.5625rem) + 3rem - 6rem);
+    }
 }

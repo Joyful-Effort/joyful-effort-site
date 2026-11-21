@@ -77,7 +77,24 @@ export const footer = {
         {
             heading: 'Trust and information',
             // Privacy notice and Terms and Conditions are added once the approved pages exist.
-            links: [{ label: 'Trust Center', href: routes.trustCenter }],
+            // Section labels match the Trust Center's own section bar.
+            links: [
+                { label: 'Trust Center', href: routes.trustCenter },
+                {
+                    label: 'Security & reliability',
+                    href: `${routes.trustCenter}#security-and-reliability`,
+                },
+                {
+                    label: 'Privacy & your data',
+                    href: `${routes.trustCenter}#privacy-and-your-data`,
+                },
+                {
+                    label: 'Policies & assurance',
+                    href: `${routes.trustCenter}#policies-and-assurance`,
+                },
+                { label: 'Your region', href: `${routes.trustCenter}#your-region` },
+                { label: 'Service providers', href: routes.trustCenterProviders },
+            ],
         },
     ] satisfies { heading: string; links: SiteLink[] }[],
     contact: {

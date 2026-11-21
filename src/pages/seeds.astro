@@ -42,7 +42,8 @@ const handStyle = `<style>:root{${handImages.join(';')}}</style>`;
 // The next meeting is chosen at build time, and the page script moves it on after each meeting.
 const sessions = sessionViews();
 const buildTime = Date.now();
-const nextNumber = sessions.find((s) => s.end.getTime() > buildTime)?.number;
+const nextSession = sessions.find((s) => s.end.getTime() > buildTime);
+const nextNumber = nextSession?.number;
 // Section 1 shows the usual local times, taken from the next session (or the last listed one).
 const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[sessions.length - 1])
     .times;
@@ -190,6 +191,12 @@ const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[se
   .grid.g2 > .card:nth-child(4n)::before{background-image:var(--hand-rule-v-1)}
   .grid.g2 > .card:nth-child(n+3)::after{display:block}
   .grid.g2 > .card:nth-child(even)::before{display:block}
+  /* An odd last card spans the row, so the grid always closes neatly. */
+  .grid.g2 > .card:last-child:nth-child(odd){grid-column:1 / -1}
+  /* The final "up next" tile, like the invitation tile that closes the main site's centers grid. */
+  .grid.g2 > .card.upnext{background:var(--sunshine)}
+  .card.upnext p{color:var(--secondary-foreground)}
+  .card.upnext .badge.solid{background:var(--ivory)}
 
   /* ============ small capitals labels ============ */
   .badges{display:flex;flex-wrap:wrap;align-items:center;gap:6px 0;margin-bottom:12px}
@@ -670,6 +677,17 @@ const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[se
             </div>
           </div>
         </div>
+
+        {nextSession && (
+          <div class="card upnext" data-upnext>
+            <div class="body">
+              <div class="badges"><span class="badge" data-upnext-session>Session {nextSession.number}</span><span class="badge solid">Up next</span></div>
+              <h3 data-upnext-date>{nextSession.longDate}</h3>
+              <p>The slides and recording will be added here after the meeting.</p>
+              <div class="actions"><a class="btn" href="#top">Meeting time and calendar</a></div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   </section>
@@ -754,6 +772,17 @@ const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[se
     for (const card of cards) card.hidden = card !== next;
     const none = document.querySelector<HTMLElement>('[data-next-none]');
     if (none) none.hidden = next !== undefined;
+    const upNext = document.querySelector<HTMLElement>('[data-upnext]');
+    if (upNext) {
+        if (next) {
+            const label = upNext.querySelector('[data-upnext-session]');
+            const date = upNext.querySelector('[data-upnext-date]');
+            if (label) label.textContent = `Session ${next.dataset.nextSession}`;
+            if (date) date.textContent = next.querySelector('.next-date')?.textContent ?? '';
+        } else {
+            upNext.remove();
+        }
+    }
     for (const badge of document.querySelectorAll<HTMLElement>('[data-next-badge]')) {
         badge.hidden = badge.dataset.nextBadge !== next?.dataset.nextSession;
     }

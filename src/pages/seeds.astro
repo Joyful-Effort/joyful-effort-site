@@ -22,7 +22,8 @@ const canonical = new URL('/seeds', Astro.site);
 <meta name="description" content={description} />
 <meta name="robots" content="noindex" />
 <link rel="canonical" href={canonical} />
-<link rel="icon" href="/images/seeds/joyma-mark.png" type="image/png" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.png" type="image/png" />
 <style is:global>
   /* Colors and font from the Joyful Effort site (src/styles/global.css): sunshine yellow and ivory neutrals, DM Sans. */
   :root{
@@ -64,7 +65,6 @@ const canonical = new URL('/seeds', Astro.site);
     min-height:80px;flex-wrap:wrap;
   }
   .logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex:none}
-  .logo img{width:52px;height:auto;display:block}
   .logo span{font-size:28px;font-weight:600;color:var(--foreground);letter-spacing:-.02em;line-height:1}
   .topnav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
   .topnav a{
@@ -155,13 +155,6 @@ const canonical = new URL('/seeds', Astro.site);
   .card.sand h3,.card.sand p{color:var(--warning-subtle-fg)}
   .card.sand p strong{color:var(--warning-subtle-fg)}
 
-  /* media block, the cream lotus placeholder used on stage event cards */
-  .media{
-    background:var(--muted);height:180px;display:flex;align-items:center;justify-content:center;
-    border-bottom:1px solid var(--border);
-  }
-  .media img{width:180px;opacity:.92}
-
   /* ============ badges ============ */
   .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
   .badge{
@@ -246,7 +239,6 @@ const canonical = new URL('/seeds', Astro.site);
     max-width:1180px;margin:0 auto;padding:30px 24px 40px;text-align:center;
     color:var(--text-muted);font-size:14px;line-height:1.9;
   }
-  .footin .mark{width:40px;margin:0 auto 10px;display:block;opacity:.85}
 
   /* the longer nav labels need a little less room on mid-size screens */
   @media (max-width:1000px){
@@ -270,7 +262,6 @@ const canonical = new URL('/seeds', Astro.site);
 <div class="topbar">
   <div class="bar">
     <a class="logo" href="#top" aria-label="Joyma Seeds home">
-      <img src="/images/seeds/joyma-mark.png" alt="">
       <span>joyma</span>
     </a>
     <nav class="topnav">
@@ -486,7 +477,6 @@ const canonical = new URL('/seeds', Astro.site);
 
       <div class="grid g2">
         <div class="card">
-          <div class="media"><img src="/images/seeds/joyma-mark.png" alt=""></div>
           <div class="body">
             <div class="badges"><span class="badge soft">Session 1</span><span class="badge">Kickoff</span></div>
             <h3>Kickoff &amp; first look</h3>
@@ -502,7 +492,6 @@ const canonical = new URL('/seeds', Astro.site);
         </div>
 
         <div class="card">
-          <div class="media"><img src="/images/seeds/joyma-mark.png" alt=""></div>
           <div class="body">
             <div class="badges"><span class="badge soft">Session 2</span><span class="badge">Cycle review</span></div>
             <h3>Cycle review</h3>
@@ -518,7 +507,6 @@ const canonical = new URL('/seeds', Astro.site);
         </div>
 
         <div class="card">
-          <div class="media"><img src="/images/seeds/joyma-mark.png" alt=""></div>
           <div class="body">
             <div class="badges"><span class="badge soft">Session 3</span><span class="badge">Run-up</span></div>
             <h3>Run-up to launch</h3>
@@ -534,7 +522,6 @@ const canonical = new URL('/seeds', Astro.site);
         </div>
 
         <div class="card">
-          <div class="media"><img src="/images/seeds/joyma-mark.png" alt=""></div>
           <div class="body">
             <div class="badges"><span class="badge soft">Session 4</span><span class="badge">Payments</span></div>
             <h3>Payments arrive</h3>
@@ -550,7 +537,6 @@ const canonical = new URL('/seeds', Astro.site);
         </div>
 
         <div class="card">
-          <div class="media"><img src="/images/seeds/joyma-mark.png" alt=""></div>
           <div class="body">
             <div class="badges"><span class="badge soft">Session 5</span><span class="badge sand">Most recent</span></div>
             <h3>What we built, and where it goes next</h3>
@@ -634,7 +620,6 @@ const canonical = new URL('/seeds', Astro.site);
 
 <footer>
   <div class="footin">
-    <img class="mark" src="/images/seeds/joyma-mark.png" alt="">
     <strong style="color:var(--foreground)">Joyma Seeds</strong> &middot; the centers who shape Joyma while we build it<br>
     Jamyang &middot; IVY &middot; Shantideva &middot; Thubten Norbu Ling &middot; Chandrakirti<br>
     <a href="https://stage.joyma.co" target="_blank" rel="noopener">stage.joyma.co</a> &middot;

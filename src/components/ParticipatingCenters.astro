@@ -1,0 +1,85 @@
+---
+/**
+ * Hand-ruled grid of the centers testing Joyma, in the style of the footer grid: one tile per
+ * center (logo, name, country) and a final tile inviting other centers to inquire.
+ * Interior dividers are drawn per tile so they follow the column count at each breakpoint.
+ */
+import { Image } from 'astro:assets';
+import type { SiteLink } from '@/content/site';
+import Button from './Button.astro';
+import HandFrame from './HandFrame.astro';
+import HandRule from './HandRule.astro';
+
+interface Props {
+    centers: { name: string; country: string; logo?: ImageMetadata }[];
+    invitation: { heading: string; text: string; link: SiteLink };
+    class?: string;
+}
+
+const { centers, invitation, class: className = '' } = Astro.props;
+const tileCount = centers.length + 1;
+
+/** Divider classes for tile `index`: 1 column on phones, 2 from sm, 3 from lg. */
+function dividers(index: number) {
+    return {
+        top: [
+            index === 0 && 'hidden',
+            index > 0 && index < 2 && 'sm:hidden',
+            index >= 2 && 'sm:block',
+            index > 0 && index < 3 ? 'lg:hidden' : index >= 3 && 'lg:block',
+        ],
+        left: ['hidden', index % 2 === 1 && 'sm:block', index % 3 !== 0 ? 'lg:block' : 'lg:hidden'],
+    };
+}
+---
+
+<HandFrame variant={2} class:list={['bg-ivory-light', className]}>
+    <ul class="grid sm:grid-cols-2 lg:grid-cols-3" role="list">
+        {
+            centers.map((center, index) => {
+                const rule = dividers(index);
+                return (
+                    <li class="relative flex flex-col gap-4 p-6 md:p-8">
+                        <HandRule variant={index} class:list={['top-0 left-0', rule.top]} />
+                        <HandRule orientation="vertical" variant={index + 1} class:list={['top-0 left-0', rule.left]} />
+                        {center.logo ? (
+                            <div class="flex h-16 items-center">
+                                <Image
+                                    src={center.logo}
+                                    alt=""
+                                    class="h-full w-auto max-w-full object-contain object-left"
+                                />
+                            </div>
+                        ) : (
+                            <div
+                                class="flex h-16 w-16 items-center justify-center border-2 border-dashed border-navy/35 text-xs font-medium tracking-wide text-navy/60 uppercase"
+                                aria-hidden="true"
+                            >
+                                Logo
+                            </div>
+                        )}
+                        <div>
+                            <h3 class="text-lg leading-snug font-semibold">{center.name}</h3>
+                            <p class="mt-1 text-base">{center.country}</p>
+                        </div>
+                    </li>
+                );
+            })
+        }
+        <li class="relative flex flex-col bg-navy p-6 text-ivory-light md:p-8">
+            <HandRule variant={tileCount} class:list={['top-0 left-0 text-navy', dividers(tileCount - 1).top]} />
+            <HandRule
+                orientation="vertical"
+                variant={tileCount + 1}
+                class:list={['top-0 left-0 text-navy', dividers(tileCount - 1).left]}
+            />
+            <h3 class="text-lg leading-snug font-semibold">{invitation.heading}</h3>
+            <p class="mt-3 text-base">{invitation.text}</p>
+            <div class="mt-auto pt-6">
+                <Button href={invitation.link.href} tone="ivory">
+                    {invitation.link.label}
+                </Button>
+            </div>
+        </li>
+    </ul>
+</HandFrame>

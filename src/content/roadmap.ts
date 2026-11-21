@@ -4,6 +4,14 @@
  * and the hero's mention of it are no longer used.
  */
 
+import type { ImageMetadata } from 'astro';
+import chandrakirtiLogo from '@/assets/centers/chandrakirti.png';
+import ivyLogo from '@/assets/centers/institut-vajra-yogini.png';
+import jamyangLogo from '@/assets/centers/jamyang-london.svg';
+import shantidevaLogo from '@/assets/centers/shantideva.png';
+import tnlLogo from '@/assets/centers/thubten-norbu-ling.svg';
+import { routes } from './site';
+
 export const roadmap = {
     hero: {
         heading: 'Help shape the development of Joyma',
@@ -47,6 +55,35 @@ export const roadmap = {
                 illustration: 'communications',
             },
         ],
+    },
+    participatingCenters: {
+        heading: 'Centers testing Joyma',
+        intro: 'These centers are exploring Joyma in our test environment and sharing what works for their communities.',
+        // Logos are used with each center's permission. A center without `logo` shows a placeholder.
+        centers: [
+            {
+                name: 'Jamyang Buddhist Center London',
+                country: 'United Kingdom',
+                logo: jamyangLogo,
+            },
+            { name: 'Shantideva Center', country: 'United States', logo: shantidevaLogo },
+            {
+                name: 'The Buddhist Center Thubten Norbu Ling',
+                country: 'United States',
+                logo: tnlLogo,
+            },
+            { name: 'Institut Vajra Yogini', country: 'France', logo: ivyLogo },
+            {
+                name: 'Chandrakirti Meditation Center',
+                country: 'New Zealand',
+                logo: chandrakirtiLogo,
+            },
+        ] as { name: string; country: string; logo?: ImageMetadata }[],
+        invitation: {
+            heading: 'Could your center test Joyma?',
+            text: 'We’d love to hear from more centers who would like to explore Joyma and share feedback. Tell us about your center and your program.',
+            link: { label: 'Inquire for your center', href: routes.centerInquiry },
+        },
     },
     inDevelopment: {
         heading: 'In development',

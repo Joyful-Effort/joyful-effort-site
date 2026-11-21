@@ -4,6 +4,9 @@
  * and the hero's mention of it are no longer used.
  */
 
+import type { ImageMetadata } from 'astro';
+import { routes } from './site';
+
 export const roadmap = {
     hero: {
         heading: 'Help shape the development of Joyma',
@@ -47,6 +50,23 @@ export const roadmap = {
                 illustration: 'communications',
             },
         ],
+    },
+    participatingCenters: {
+        heading: 'Centers testing Joyma',
+        intro: 'These centers are exploring Joyma in our test environment and sharing what works for their communities.',
+        // `logo` is added per center once we have each center's logo and permission to use it.
+        centers: [
+            { name: 'Jamyang Buddhist Center London', country: 'United Kingdom' },
+            { name: 'Shantideva Center', country: 'United States' },
+            { name: 'The Buddhist Center Thubten Norbu Ling', country: 'United States' },
+            { name: 'Institut Vajra Yogini', country: 'France' },
+            { name: 'Chandrakirti Meditation Center', country: 'New Zealand' },
+        ] as { name: string; country: string; logo?: ImageMetadata }[],
+        invitation: {
+            heading: 'Could your center test Joyma?',
+            text: 'We’re open to hearing from more centers who would like to explore Joyma and share feedback. Tell us about your center and your program.',
+            link: { label: 'Inquire for your center', href: routes.centerInquiry },
+        },
     },
     inDevelopment: {
         heading: 'In development',

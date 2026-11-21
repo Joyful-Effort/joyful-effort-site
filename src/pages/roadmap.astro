@@ -2,6 +2,7 @@
 import ComingSoon from '@/components/ComingSoon.astro';
 import HandFrame from '@/components/HandFrame.astro';
 import Illustration from '@/components/Illustration.astro';
+import ParticipatingCenters from '@/components/ParticipatingCenters.astro';
 import Section from '@/components/Section.astro';
 import SplitHero from '@/components/SplitHero.astro';
 import TextBlock from '@/components/TextBlock.astro';
@@ -35,6 +36,19 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
                     </HandFrame>
                 ))
             }
+        </div>
+
+        <div id="participating-centers" class="mt-16 scroll-mt-28 md:mt-24">
+            <TextBlock
+                heading={roadmap.participatingCenters.heading}
+                paragraphs={[roadmap.participatingCenters.intro]}
+                class="max-w-[44rem]"
+            />
+            <ParticipatingCenters
+                centers={roadmap.participatingCenters.centers}
+                invitation={roadmap.participatingCenters.invitation}
+                class="mt-10 md:mt-12"
+            />
         </div>
     </Section>
 

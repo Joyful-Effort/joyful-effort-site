@@ -43,7 +43,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
     <Section tone="light">
         <p class="eyebrow">{getInvolved.participationLabel}</p>
-        <div class="mt-8 grid gap-8 md:grid-cols-2">
+        <div class="mt-8 grid gap-8 md:grid-cols-2" data-reveal-group>
             {
                 getInvolved.ways.map((way, index) => (
                     <HandFrame variant={index}>

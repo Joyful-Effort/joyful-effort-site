@@ -23,7 +23,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
     <Section tone="warm">
         <TextBlock heading={roadmap.pilot.heading} paragraphs={[roadmap.pilot.intro]} class="max-w-[44rem]" />
-        <div class="mt-10 grid gap-8 md:mt-14 md:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-10 grid gap-8 md:mt-14 md:grid-cols-2 lg:grid-cols-3" data-reveal-group>
             {
                 roadmap.pilot.items.map((item, index) => (
                     <HandFrame variant={index} class="bg-ivory-light">
@@ -39,7 +39,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     </Section>
 
     <Section tone="light">
-        <div class="grid gap-10 md:grid-cols-3 md:gap-8">
+        <div class="grid gap-10 md:grid-cols-3 md:gap-8" data-reveal-group>
             <div>
                 <h2 id="in-development" class="h3">{roadmap.inDevelopment.heading}</h2>
                 <ComingSoon text={roadmap.inDevelopment.text} class="mt-6" variant={0} />

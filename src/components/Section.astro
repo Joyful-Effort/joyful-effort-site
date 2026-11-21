@@ -30,6 +30,7 @@ const tones = {
     aria-labelledby={labelledBy}
     class:list={[
         tones[tone],
+        tone === 'navy' && 'section-expand',
         spacing === 'default' ? 'py-12 md:py-18 lg:py-24' : 'py-10 md:py-14',
         className,
     ]}

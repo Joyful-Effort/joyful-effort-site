@@ -112,3 +112,88 @@
         overflow: visible;
     }
 }
+
+/*
+ * Motion. Everything here is gentle, plays once, and is switched off entirely for
+ * visitors who ask their device to reduce motion.
+ */
+@layer components {
+    /* Primary buttons lift onto a flat offset shadow on hover and press back down on click. */
+    .button-lift {
+        --lift-shadow: var(--color-navy);
+        transition:
+            background-color 200ms ease,
+            transform 200ms ease,
+            box-shadow 200ms ease;
+    }
+
+    .button-lift-ivory {
+        --lift-shadow: var(--color-ivory-light);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .button-lift:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 0 var(--lift-shadow);
+        }
+
+        .button-lift:active {
+            transform: translate(0, 0);
+            box-shadow: 0 0 0 0 var(--lift-shadow);
+            transition-duration: 80ms;
+        }
+
+        /* The hero's coral underline draws itself from left to right as the page opens. */
+        .draw-underline {
+            animation: draw-underline 700ms cubic-bezier(0.65, 0, 0.35, 1) 350ms both;
+        }
+    }
+
+    /* Blocks rise gently into place as they scroll into view (see BaseLayout). */
+    .js-reveal [data-reveal] {
+        opacity: 0;
+        transform: translateY(1rem);
+        transition:
+            opacity 600ms ease-out,
+            transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .js-reveal [data-reveal].is-revealed {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Navy sections start slightly inset and widen to full width as they scroll into view. */
+    @supports (animation-timeline: view()) {
+        @media (prefers-reduced-motion: no-preference) {
+            .section-expand {
+                /* Longhands on purpose: the CSS minifier folds a shorthand plus timeline into
+                   a form browsers reject. */
+                animation-name: section-expand;
+                animation-timing-function: linear;
+                animation-fill-mode: both;
+                animation-timeline: view();
+                animation-range: entry 0% cover 35%;
+            }
+        }
+    }
+}
+
+@keyframes draw-underline {
+    from {
+        clip-path: inset(-50% 100% -50% 0);
+    }
+    to {
+        clip-path: inset(-50% 0 -50% 0);
+    }
+}
+
+@keyframes section-expand {
+    from {
+        clip-path: inset(0 max(1rem, 4vw));
+    }
+    to {
+        clip-path: inset(0 0);
+    }
+}

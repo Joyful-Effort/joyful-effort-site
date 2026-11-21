@@ -2,6 +2,7 @@
 import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 import '@fontsource/dm-sans/600.css';
+import { MEETING, sessionViews } from '../lib/seeds-meetings';
 
 /**
  * The Joyma Seeds hub: the home page for the pilot centers between monthly meetings.
@@ -11,6 +12,11 @@ const title = 'Joyma Seeds — everything in one place';
 const description =
     'Joyma Seeds: meeting times, the test environment, what to test this month, where we need your input, past presentations and contacts.';
 const canonical = new URL('/seeds', Astro.site);
+
+// The next meeting is chosen at build time, and the page script moves it on after each meeting.
+const sessions = sessionViews();
+const buildTime = Date.now();
+const nextNumber = sessions.find((s) => s.end.getTime() > buildTime)?.number;
 ---
 
 <!doctype html>
@@ -194,6 +200,34 @@ const canonical = new URL('/seeds', Astro.site);
   }
   .tz b{font-weight:600}
   .meet-join{margin:16px 0 24px}
+  [hidden]{display:none !important}
+
+  /* ============ next meeting card, top of the hero ============ */
+  .next{
+    background:var(--card);border-radius:var(--radius);box-shadow:0 1px 3px rgba(36,33,28,.12);
+    padding:22px 24px;margin:4px 0 26px;max-width:780px;
+  }
+  .next-eyebrow{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--muted-foreground);margin-bottom:6px}
+  .next-date{font-size:clamp(22px,3vw,28px);font-weight:600;letter-spacing:-.015em;line-height:1.2;color:var(--foreground);margin-bottom:14px}
+  .next .tz small{font-size:12px;margin-left:3px}
+  .next .actions{margin-top:18px}
+  .next-note{margin-top:14px;font-size:14px;color:var(--text-muted)}
+  .addcal{position:relative}
+  .addcal summary{list-style:none;cursor:pointer}
+  .addcal summary::-webkit-details-marker{display:none}
+  .addcal summary .chev{transition:transform .15s}
+  .addcal[open] summary .chev{transform:rotate(180deg)}
+  .addcal-menu{
+    position:absolute;left:0;top:calc(100% + 6px);z-index:5;min-width:240px;
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);
+    box-shadow:0 8px 24px -8px rgba(36,33,28,.25);padding:6px;display:flex;flex-direction:column;
+  }
+  .addcal-menu a{
+    display:block;text-decoration:none;color:var(--foreground);font-size:14.5px;font-weight:600;
+    padding:10px 12px;border-radius:8px;
+  }
+  .addcal-menu a span{display:block;font-weight:400;font-size:13px;color:var(--text-muted)}
+  .addcal-menu a:hover,.addcal-menu a:focus-visible{background:var(--secondary)}
 
   /* ============ lists ============ */
   .kinds{
@@ -282,6 +316,37 @@ const canonical = new URL('/seeds', Astro.site);
   <div class="hero">
     <div class="wrap">
       <h1>Joyma Seeds</h1>
+
+      {sessions.map((s) => (
+        <div class="next" data-next-session={String(s.number)} data-end={s.end.toISOString()} hidden={s.number !== nextNumber}>
+          <div class="next-eyebrow">Next meeting &middot; Session {s.number}</div>
+          <div class="next-date">{s.longDate}</div>
+          <div class="tzrow">
+            {s.times.map((t) => (
+              <span class="tz"><b>{t.time}</b> {t.label}{t.nextDay && <small>(Thursday)</small>}</span>
+            ))}
+          </div>
+          <div class="actions">
+            <a class="btn solid" href={MEETING.joinUrl} target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M15 10l5-3v10l-5-3"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg> Join the meeting</a>
+            <details class="addcal">
+              <summary class="btn"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18M12 14v4M10 16h4"/></svg> Add to calendar <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="addcal-menu">
+                <a href={s.googleUrl} target="_blank" rel="noopener">Google Calendar<span>Opens Google Calendar with the meetings filled in</span></a>
+                <a href={MEETING.calendarPath}>Apple Calendar, Outlook and others<span>Downloads a calendar file (.ics)</span></a>
+              </div>
+            </details>
+          </div>
+          <p class="next-note">Every first Wednesday, about an hour. Every session is recorded.</p>
+        </div>
+      ))}
+      <div class="next" data-next-none hidden={nextNumber !== undefined}>
+        <div class="next-eyebrow">Next meeting</div>
+        <div class="next-date">The next dates will be posted here soon</div>
+        <div class="actions">
+          <a class="btn" href={MEETING.joinUrl} target="_blank" rel="noopener">Meeting link</a>
+        </div>
+      </div>
+
       <p class="sub">Hello, dear pilot centers. Thank you for everything you are contributing to this project &mdash; your time, insights, requests and feedback. That is what will make this platform useful for as many dharma centers as possible.</p>
       <p class="sub prose"><strong>Lotus has a new name: Joyma.</strong> Same platform, same team, same Seeds program &mdash; only the name has changed. You can find it at <a href="https://joyma.co" target="_blank" rel="noopener">joyma.co</a>. Your test environment logins stay the same; the monthly meeting has a <a href="#dates">new link</a> from December.</p>
       <p class="sub prose">Each monthly meeting is where we demo updates and new features. This page is your hub in between: <a href="#do">what to test</a>, and <a href="#questions">where we still need your input</a>, so your feedback can go on that month's list and be built &mdash; or at least addressed &mdash; when we meet next. You'll also find meeting times, past presentations, and how to get in.</p>
@@ -317,10 +382,9 @@ const canonical = new URL('/seeds', Astro.site);
         <table>
           <thead><tr><th>Session</th><th>Date</th></tr></thead>
           <tbody>
-            <tr><td><span class="badge solid">Next</span> Session 6</td><td><strong>Wednesday, December 2, 2026</strong></td></tr>
-            <tr><td>Session 7</td><td><strong>Wednesday, January 6, 2027</strong></td></tr>
-            <tr><td>Session 8</td><td><strong>Wednesday, February 3, 2027</strong></td></tr>
-            <tr><td>Session 9</td><td><strong>Wednesday, March 3, 2027</strong></td></tr>
+            {sessions.map((s) => (
+              <tr><td><span class="badge solid" data-next-badge={String(s.number)} hidden={s.number !== nextNumber}>Next</span> Session {s.number}</td><td><strong>{s.longDate}</strong></td></tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -629,6 +693,28 @@ const canonical = new URL('/seeds', Astro.site);
 </footer>
 
 <script>
+    /* Move the "next meeting" on once a meeting has ended, without anyone editing the page. */
+    const now = Date.now();
+    const cards = [...document.querySelectorAll<HTMLElement>('[data-next-session]')];
+    const next = cards.find((card) => Date.parse(card.dataset.end ?? '') > now);
+    for (const card of cards) card.hidden = card !== next;
+    const none = document.querySelector<HTMLElement>('[data-next-none]');
+    if (none) none.hidden = next !== undefined;
+    for (const badge of document.querySelectorAll<HTMLElement>('[data-next-badge]')) {
+        badge.hidden = badge.dataset.nextBadge !== next?.dataset.nextSession;
+    }
+
+    /* Close the "Add to calendar" menu when clicking elsewhere or pressing Escape. */
+    const closeMenus = (except?: Element | null) => {
+        for (const menu of document.querySelectorAll('details.addcal[open]')) {
+            if (menu !== except) menu.removeAttribute('open');
+        }
+    };
+    document.addEventListener('click', (event) => closeMenus((event.target as Element).closest('details.addcal')));
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenus();
+    });
+
     /* Highlight the section you are reading in the top nav. */
     const links = new Map<string, HTMLAnchorElement>();
     for (const link of document.querySelectorAll<HTMLAnchorElement>('.topnav a[href^="#"]')) {

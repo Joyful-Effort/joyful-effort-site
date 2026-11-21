@@ -81,7 +81,7 @@ export const roadmap = {
         ] as { name: string; country: string; logo?: ImageMetadata }[],
         invitation: {
             heading: 'Could your center test Joyma?',
-            text: 'We’re open to hearing from more centers who would like to explore Joyma and share feedback. Tell us about your center and your program.',
+            text: 'We’d love to hear from more centers who would like to explore Joyma and share feedback. Tell us about your center and your program.',
             link: { label: 'Inquire for your center', href: routes.centerInquiry },
         },
     },

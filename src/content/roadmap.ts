@@ -134,6 +134,10 @@ export const roadmap = {
                     text: 'Reworked based on feedback from our partner centers.',
                 },
                 {
+                    title: 'Study spaces',
+                    text: 'A place for students to keep their Dharma study resources and prayer materials, and track their attendance at teachings.',
+                },
+                {
                     title: 'Security',
                     text: 'A security review, and Cyber Essentials certification.',
                 },

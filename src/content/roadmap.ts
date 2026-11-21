@@ -10,14 +10,14 @@ import ivyLogo from '@/assets/centers/institut-vajra-yogini.png';
 import jamyangLogo from '@/assets/centers/jamyang-london.svg';
 import shantidevaLogo from '@/assets/centers/shantideva.png';
 import tnlLogo from '@/assets/centers/thubten-norbu-ling.svg';
-import { routes } from './site';
+import { routes, type SiteLink } from './site';
 
 export const roadmap = {
     hero: {
         heading: 'Help shape the development of Joyma',
         paragraphs: [
             'We’re building Joyma with Dharma centers. This page brings together the current development priorities and what our partner centers are helping us test.',
-            'The roadmap distinguishes features ready for pilot testing from work in development and ideas still being considered. Plans may change, improve and adapt as we learn more from participating centers.',
+            'The roadmap shows features ready for pilot testing and work in development, and invites you to tell us what your center needs. Plans may change, improve and adapt as we learn more from participating centers.',
         ],
     },
     pilot: {
@@ -85,16 +85,69 @@ export const roadmap = {
             link: { label: 'Inquire for your center', href: routes.centerInquiry },
         },
     },
-    inDevelopment: {
-        heading: 'In development',
-        text: 'Coming soon',
-    },
-    underConsideration: {
-        heading: 'Under consideration',
-        text: 'Ideas we’re exploring with centers. These are not commitments to build or release a feature.',
-    },
-    recentProgress: {
-        heading: 'Recent progress',
-        text: 'Coming soon',
-    },
+    /**
+     * The three-column block below the pilot features: each column lists items or offers a link.
+     * Items are summarized from the partner (Seeds) roadmap, without dates.
+     */
+    nextSteps: [
+        {
+            id: 'in-development',
+            heading: 'In development',
+            text: 'What we’re building now, before it’s ready for centers to test.',
+            items: [
+                {
+                    title: 'A redesigned admin experience',
+                    text: 'Simpler screens for creating events and memberships, followed by the participant side.',
+                },
+                {
+                    title: 'Events on your own website',
+                    text: 'Registration and payment without leaving your center’s site.',
+                },
+                {
+                    title: 'Organizing your program',
+                    text: 'Event types, categories, tags and a calendar view.',
+                },
+                { title: 'Donations', text: 'Including an optional donation at checkout.' },
+                {
+                    title: 'Privacy tools',
+                    text: 'Accepting terms, closing an account and getting a copy of your data.',
+                },
+            ],
+        },
+        {
+            id: 'feature-requests',
+            heading: 'Feature requests',
+            text: 'Tell us what your team is trying to do and what would make it easier. You don’t need a technical solution in mind. Requests help guide our priorities, although we can’t promise to build every one.',
+            link: { label: 'Share an idea', href: routes.inquire },
+        },
+        {
+            id: 'recent-progress',
+            heading: 'Recent progress',
+            text: 'Recently completed with our partner centers.',
+            items: [
+                {
+                    title: 'Payments',
+                    text: 'Card payments through Stripe, with refunds, payment links, invoices and receipts.',
+                },
+                {
+                    title: 'Memberships rebuilt',
+                    text: 'Reworked based on feedback from our partner centers.',
+                },
+                {
+                    title: 'Study spaces',
+                    text: 'A place for students to keep their Dharma study resources and prayer materials, and track their attendance at teachings.',
+                },
+                {
+                    title: 'Security',
+                    text: 'A security review, and Cyber Essentials certification.',
+                },
+            ],
+        },
+    ] as {
+        id: string;
+        heading: string;
+        text: string;
+        items?: { title: string; text: string }[];
+        link?: SiteLink;
+    }[],
 };

@@ -93,7 +93,7 @@ export const projectJoyma = {
                     {
                         question: 'Can our center start using it now?',
                         answer: [
-                            'Joyma is currently in the build and development phase, we’re due to launch in early 2027 and the software will be ready to use from day one.',
+                            'Joyma is in development, and our partner centers are testing it with us now. If your center would like to get involved early, we’d love to hear from you.',
                         ],
                         links: [{ label: 'Inquire about Joyma', href: routes.centerInquiry }],
                     },

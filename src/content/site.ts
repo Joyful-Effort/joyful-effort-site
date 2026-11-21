@@ -102,5 +102,6 @@ export const footer = {
         text: 'Have a question about Joyful Effort or a possible collaboration? Get in touch.',
         email: contactEmail,
     },
-    copyright: '© 2026 Joyful Effort, LLC. All rights reserved.',
+    // The year comes from the build, so it stays current with each deploy.
+    copyright: `© ${new Date().getFullYear()} Joyful Effort, LLC. All rights reserved.`,
 };

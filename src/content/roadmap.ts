@@ -10,14 +10,14 @@ import ivyLogo from '@/assets/centers/institut-vajra-yogini.png';
 import jamyangLogo from '@/assets/centers/jamyang-london.svg';
 import shantidevaLogo from '@/assets/centers/shantideva.png';
 import tnlLogo from '@/assets/centers/thubten-norbu-ling.svg';
-import { routes } from './site';
+import { routes, type SiteLink } from './site';
 
 export const roadmap = {
     hero: {
         heading: 'Help shape the development of Joyma',
         paragraphs: [
             'We’re building Joyma with Dharma centers. This page brings together the current development priorities and what our partner centers are helping us test.',
-            'The roadmap distinguishes features ready for pilot testing from work in development and ideas still being considered. Plans may change, improve and adapt as we learn more from participating centers.',
+            'The roadmap shows features ready for pilot testing and work in development, and invites you to tell us what your center needs. Plans may change, improve and adapt as we learn more from participating centers.',
         ],
     },
     pilot: {
@@ -85,16 +85,25 @@ export const roadmap = {
             link: { label: 'Inquire for your center', href: routes.centerInquiry },
         },
     },
-    inDevelopment: {
-        heading: 'In development',
-        text: 'Coming soon',
-    },
-    underConsideration: {
-        heading: 'Under consideration',
-        text: 'Ideas we’re exploring with centers. These are not commitments to build or release a feature.',
-    },
-    recentProgress: {
-        heading: 'Recent progress',
-        text: 'Coming soon',
-    },
+    /** The three-column block below the pilot features. `status` shows instead of a link. */
+    nextSteps: [
+        {
+            id: 'in-development',
+            heading: 'In development',
+            text: 'Features we’re building now, before they’re ready for centers to test. We’ll list them here as they take shape.',
+            status: 'Updates coming soon',
+        },
+        {
+            id: 'feature-requests',
+            heading: 'Feature requests',
+            text: 'Tell us what your team is trying to do and what would make it easier. You don’t need a technical solution in mind. Requests help guide our priorities, although we can’t promise to build every one.',
+            link: { label: 'Share an idea', href: routes.inquire },
+        },
+        {
+            id: 'recent-progress',
+            heading: 'Recent progress',
+            text: 'What’s changed in Joyma recently, as new features move into testing with our partner centers.',
+            status: 'Updates coming soon',
+        },
+    ] as { id: string; heading: string; text: string; status?: string; link?: SiteLink }[],
 };

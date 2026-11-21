@@ -1,5 +1,5 @@
 ---
-import ComingSoon from '@/components/ComingSoon.astro';
+import Button from '@/components/Button.astro';
 import HandFrame from '@/components/HandFrame.astro';
 import Illustration from '@/components/Illustration.astro';
 import ParticipatingCenters from '@/components/ParticipatingCenters.astro';
@@ -12,7 +12,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
 <BaseLayout
     title="Roadmap and feedback"
-    description="The current development priorities for Joyma: features ready for pilot testing, work in development and ideas under consideration."
+    description="The current development priorities for Joyma: features ready for pilot testing, work in development and how to request a feature."
 >
     <SplitHero heading={roadmap.hero.heading} highlight="Joyma" paragraphs={roadmap.hero.paragraphs}>
         <HandFrame slot="media" offset variant={1} class="bg-sunshine">
@@ -53,19 +53,29 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     </Section>
 
     <Section tone="light">
-        <div class="grid gap-10 md:grid-cols-3 md:gap-8" data-reveal-group>
-            <div>
-                <h2 id="in-development" class="h3">{roadmap.inDevelopment.heading}</h2>
-                <ComingSoon text={roadmap.inDevelopment.text} class="mt-6" variant={0} />
-            </div>
-            <div>
-                <h2 id="under-consideration" class="h3">{roadmap.underConsideration.heading}</h2>
-                <p class="mt-6">{roadmap.underConsideration.text}</p>
-            </div>
-            <div>
-                <h2 id="recent-progress" class="h3">{roadmap.recentProgress.heading}</h2>
-                <ComingSoon text={roadmap.recentProgress.text} class="mt-6" variant={2} />
-            </div>
+        <div class="grid gap-8 md:grid-cols-3" data-reveal-group>
+            {
+                roadmap.nextSteps.map((step, index) => (
+                    <HandFrame variant={index}>
+                        <article class="flex h-full flex-col p-7 md:p-8">
+                            <h2 id={step.id} class="h3">
+                                {step.heading}
+                            </h2>
+                            <p class="mt-4">{step.text}</p>
+                            <div class="mt-auto pt-7">
+                                {step.link ? (
+                                    <Button href={step.link.href}>{step.link.label}</Button>
+                                ) : (
+                                    <p class="inline-flex items-center gap-2 text-sm font-medium">
+                                        <span class="h-2 w-2 rounded-full bg-coral" aria-hidden="true" />
+                                        {step.status}
+                                    </p>
+                                )}
+                            </div>
+                        </article>
+                    </HandFrame>
+                ))
+            }
         </div>
     </Section>
 </BaseLayout>

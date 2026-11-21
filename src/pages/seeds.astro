@@ -1,10 +1,11 @@
 ---
-import '@fontsource-variable/mulish/wght.css';
-import '@fontsource-variable/mulish/wght-italic.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+import '@fontsource/dm-sans/600.css';
 
 /**
  * The Joyma Seeds hub: the home page for the pilot centers between monthly meetings.
- * It keeps the Joyma product look rather than the Joyful Effort site design, so it does not use BaseLayout.
+ * It borrows only the Joyful Effort yellow, ivory neutrals and DM Sans; it does not use BaseLayout or the hand-drawn elements.
  */
 const title = 'Joyma Seeds — everything in one place';
 const description =
@@ -23,24 +24,24 @@ const canonical = new URL('/seeds', Astro.site);
 <link rel="canonical" href={canonical} />
 <link rel="icon" href="/images/seeds/joyma-mark.png" type="image/png" />
 <style is:global>
-  /* Tokens lifted from lotus/resources/css/app.css */
+  /* Colors and font from the Joyful Effort site (src/styles/global.css): sunshine yellow and ivory neutrals, DM Sans. */
   :root{
-    --site-background:#ffffff; --background:#fdfaff; --foreground:#1a0f20;
-    --text:#242124; --text-muted:#6b666b;
+    --sunshine:#f6c945; --ivory:#fbf8f1;
+    --site-background:var(--ivory); --background:var(--ivory); --foreground:#24211c;
+    --text:#24211c; --text-muted:#625c51;
     --card:#ffffff;
-    --primary:#a24a89; --primary-foreground:#ffffff;
-    --secondary:#f3e7f1; --secondary-foreground:#6f356d;
-    --muted:#f3eee3; --muted-foreground:#8a6898;
-    --border:rgba(162,74,137,.14);
-    --rule:rgba(162,74,137,.22);
-    --heading:#a24a89; --brand-deep:#6d3285; --brand-tint:#f4daff;
-    --band-alt:#faf3f8;
-    --warning-subtle:#fde9b0; --warning-subtle-fg:#7a4e10;
-    --chart-4:#7a9c72; --chart-5:#d5a642;
+    --primary:var(--sunshine); --primary-foreground:#24211c; --primary-hover:#ecbb2c;
+    --secondary:#fcefc4; --secondary-foreground:#4d4126;
+    --muted:#f3eee3; --muted-foreground:#8a8272;
+    --border:rgba(36,33,28,.11);
+    --rule:rgba(36,33,28,.14);
+    --heading:#24211c;
+    --band-alt:#f5f0e4;
+    --warning-subtle:#efe7d5; --warning-subtle-fg:#4d4126;
     --radius:.875rem; --radius-sm:.75rem;
-    --shadow-card:0 1px 2px rgba(26,15,32,.05);
+    --shadow-card:0 1px 2px rgba(36,33,28,.05);
     --shadow-bar:0 2px 6px -4px rgba(0,0,0,.16);
-    --font-sans:"Mulish Variable",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    --font-sans:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -53,8 +54,8 @@ const canonical = new URL('/seeds', Astro.site);
 
   /* ============ sticky white header, as on stage ============ */
   .topbar{
-    position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);
-    border-bottom:1px solid rgba(162,74,137,.1);
+    position:sticky;top:0;z-index:40;background:rgba(251,248,241,.94);
+    border-bottom:1px solid var(--border);
     box-shadow:var(--shadow-bar);backdrop-filter:blur(8px);
   }
   .bar{
@@ -64,14 +65,14 @@ const canonical = new URL('/seeds', Astro.site);
   }
   .logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex:none}
   .logo img{width:52px;height:auto;display:block}
-  .logo span{font-size:28px;font-weight:800;color:var(--primary);letter-spacing:-.02em;line-height:1}
+  .logo span{font-size:28px;font-weight:600;color:var(--foreground);letter-spacing:-.02em;line-height:1}
   .topnav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
   .topnav a{
     color:var(--foreground);text-decoration:none;font-size:15px;font-weight:600;
     padding:8px 12px;border-radius:9px;transition:.15s;white-space:nowrap;
   }
   .topnav a:hover{background:var(--secondary);color:var(--secondary-foreground)}
-  .topnav a.accent{color:var(--primary)}
+  .topnav a.accent{background:var(--primary);color:var(--primary-foreground)}
   .topnav a.current{background:var(--secondary);color:var(--secondary-foreground)}
 
   /* ============ bands: each section is its own full width block ============ */
@@ -82,21 +83,21 @@ const canonical = new URL('/seeds', Astro.site);
   /* ============ hero ============ */
   .hero{
     padding:56px 0 60px;
-    background:linear-gradient(180deg,var(--brand-tint) 0%,#fdf6fb 55%,var(--site-background) 100%);
+    background:var(--sunshine);
     border-bottom:1px solid var(--rule);
   }
   h1{
-    font-size:clamp(34px,5vw,50px);font-weight:800;color:var(--heading);
+    font-size:clamp(34px,5vw,50px);font-weight:600;color:var(--heading);
     letter-spacing:-.025em;line-height:1.08;margin-bottom:14px;
   }
-  .hero .sub{font-size:16.5px;color:var(--text-muted);max-width:72ch}
+  .hero .sub{font-size:16.5px;color:var(--secondary-foreground);max-width:72ch}
   .hero .sub + .sub{margin-top:10px}
   .hero .stamp{
     display:inline-flex;align-items:center;gap:8px;margin-top:20px;
     background:#fff;border:1px solid var(--border);border-radius:999px;
     padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--secondary-foreground);
   }
-  .hero .stamp svg{width:15px;height:15px;stroke:var(--primary);fill:none;stroke-width:1.8}
+  .hero .stamp svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8}
 
   /* ============ section headers ============ */
   .sechead{margin-bottom:30px;padding-bottom:22px;border-bottom:2px solid var(--rule)}
@@ -104,11 +105,11 @@ const canonical = new URL('/seeds', Astro.site);
   
   .secnum{
     display:inline-flex;align-items:center;justify-content:center;flex:none;
-    width:28px;height:28px;border-radius:9px;background:var(--primary);color:#fff;
-    font-size:13px;font-weight:800;letter-spacing:0;
+    width:28px;height:28px;border-radius:9px;background:var(--primary);color:var(--primary-foreground);
+    font-size:13px;font-weight:600;letter-spacing:0;
   }
   h2{
-    font-size:clamp(27px,3.6vw,36px);font-weight:800;color:var(--heading);
+    font-size:clamp(27px,3.6vw,36px);font-weight:600;color:var(--heading);
     letter-spacing:-.022em;line-height:1.12;margin-bottom:10px;
   }
   .sechead h2:last-child{margin-bottom:0}
@@ -117,8 +118,8 @@ const canonical = new URL('/seeds', Astro.site);
 
   /* a small label above a group inside a section */
   .subhead{
-    font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-    color:var(--primary);margin:0 0 12px;
+    font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--muted-foreground);margin:0 0 12px;
   }
 
   /* grouped topic inside a section */
@@ -135,22 +136,22 @@ const canonical = new URL('/seeds', Astro.site);
   }
   .card .body{padding:22px 24px;display:flex;flex-direction:column;flex:1}
   .card h3{
-    font-size:20px;font-weight:800;color:var(--foreground);
+    font-size:20px;font-weight:600;color:var(--foreground);
     letter-spacing:-.015em;line-height:1.25;margin-bottom:10px;
   }
   .card h4{
-    font-size:17.5px;font-weight:800;color:var(--heading);
+    font-size:17.5px;font-weight:600;color:var(--heading);
     letter-spacing:-.01em;line-height:1.25;margin:22px 0 8px;
     padding-top:18px;border-top:1px solid var(--border);
   }
   .card h4:first-child{margin-top:0;padding-top:0;border-top:0}
   .card p{font-size:15.5px;color:var(--text-muted)}
   .card p + p{margin-top:10px}
-  .card p strong{color:var(--foreground);font-weight:700}
-  .card.tint{background:var(--secondary);border-color:rgba(162,74,137,.2)}
-  .card.tint h3{color:var(--brand-deep)}
+  .card p strong{color:var(--foreground);font-weight:600}
+  .card.tint{background:var(--secondary);border-color:rgba(246,201,69,.5)}
+  .card.tint h3{color:var(--foreground)}
   .card.tint p{color:var(--secondary-foreground)}
-  .card.sand{background:var(--warning-subtle);border-color:rgba(213,166,66,.4)}
+  .card.sand{background:var(--warning-subtle);border-color:var(--rule)}
   .card.sand h3,.card.sand p{color:var(--warning-subtle-fg)}
   .card.sand p strong{color:var(--warning-subtle-fg)}
 
@@ -169,7 +170,7 @@ const canonical = new URL('/seeds', Astro.site);
     background:#fff;color:var(--text-muted);white-space:nowrap;
   }
   .badge.soft{background:var(--secondary);color:var(--secondary-foreground);border-color:transparent}
-  .badge.solid{background:var(--primary);color:var(--primary-foreground);border-color:transparent;font-weight:700}
+  .badge.solid{background:var(--primary);color:var(--primary-foreground);border-color:transparent;font-weight:600}
   .badge.sand{background:var(--warning-subtle);color:var(--warning-subtle-fg);border-color:transparent}
 
   /* ============ meta rows ============ */
@@ -178,18 +179,18 @@ const canonical = new URL('/seeds', Astro.site);
   .meta svg{width:16px;height:16px;flex:none;stroke:var(--muted-foreground);fill:none;stroke-width:1.7}
 
   /* ============ links & buttons ============ */
-  a{color:var(--primary);font-weight:600}
+  a{color:var(--foreground);font-weight:600;text-decoration-color:var(--sunshine);text-decoration-thickness:2px}
   .prose a{text-decoration:underline;text-underline-offset:3px}
   .prose a:hover{text-decoration:none}
   .actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
   .btn{
-    display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-size:14.5px;font-weight:700;
+    display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-size:14.5px;font-weight:600;
     border-radius:10px;padding:10px 16px;border:1px solid var(--border);
-    background:#fff;color:var(--primary);transition:.15s;
+    background:#fff;color:var(--foreground);transition:.15s;
   }
-  .btn:hover{background:var(--secondary);border-color:var(--primary)}
-  .btn.solid{background:var(--primary);color:#fff;border-color:var(--primary)}
-  .btn.solid:hover{background:var(--brand-deep);border-color:var(--brand-deep)}
+  .btn:hover{background:var(--secondary);border-color:var(--primary-hover)}
+  .btn.solid{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)}
+  .btn.solid:hover{background:var(--primary-hover);border-color:var(--primary-hover)}
   .btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
 
   /* ============ meeting times ============ */
@@ -198,7 +199,7 @@ const canonical = new URL('/seeds', Astro.site);
     background:var(--secondary);border-radius:999px;padding:7px 14px;
     font-size:14px;color:var(--secondary-foreground);white-space:nowrap;
   }
-  .tz b{font-weight:800}
+  .tz b{font-weight:600}
   .meet-join{margin:16px 0 24px}
 
   /* ============ lists ============ */
@@ -207,8 +208,8 @@ const canonical = new URL('/seeds', Astro.site);
     font-size:15.5px;max-width:80ch;
   }
   .kinds li + li{margin-top:8px}
-  .kinds li::marker{color:var(--primary)}
-  .kinds strong{color:var(--foreground);font-weight:700}
+  .kinds li::marker{color:var(--muted-foreground)}
+  .kinds strong{color:var(--foreground);font-weight:600}
 
   /* ============ table ============ */
   .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;
@@ -216,11 +217,11 @@ const canonical = new URL('/seeds', Astro.site);
     box-shadow:var(--shadow-card)}
   table{width:100%;border-collapse:collapse;font-size:15.5px}
   th{
-    text-align:left;background:var(--muted);color:var(--brand-deep);font-size:11.5px;font-weight:800;
+    text-align:left;background:var(--muted);color:var(--secondary-foreground);font-size:11.5px;font-weight:600;
     text-transform:uppercase;letter-spacing:.1em;padding:13px 20px;white-space:nowrap;
   }
   td{padding:14px 20px;border-top:1px solid var(--border);vertical-align:middle;color:var(--text-muted)}
-  td strong{color:var(--foreground);font-weight:700}
+  td strong{color:var(--foreground);font-weight:600}
   td .badge{margin-right:8px}
   td.nw{white-space:nowrap}
   td code{
@@ -231,15 +232,15 @@ const canonical = new URL('/seeds', Astro.site);
   /* ============ callouts ============ */
   .callout{
     border-radius:var(--radius-sm);padding:16px 20px;font-size:15.5px;margin-top:20px;
-    background:var(--secondary);color:var(--secondary-foreground);border:1px solid rgba(162,74,137,.16);
+    background:var(--secondary);color:var(--secondary-foreground);border:1px solid rgba(246,201,69,.5);
   }
-  .callout.sand{background:var(--warning-subtle);color:var(--warning-subtle-fg);border-color:rgba(213,166,66,.4)}
+  .callout.sand{background:var(--warning-subtle);color:var(--warning-subtle-fg);border-color:var(--rule)}
   .callout a{color:inherit;text-decoration:underline;text-underline-offset:3px}
-  .callout strong{font-weight:800}
+  .callout strong{font-weight:600}
   .note{margin-top:16px;font-size:15.5px;color:var(--text-muted);max-width:80ch}
 
   footer{
-    border-top:1px solid var(--rule);background:#fff;
+    border-top:1px solid var(--rule);background:var(--ivory);
   }
   .footin{
     max-width:1180px;margin:0 auto;padding:30px 24px 40px;text-align:center;

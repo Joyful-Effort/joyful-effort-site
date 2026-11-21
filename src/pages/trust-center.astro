@@ -1,5 +1,4 @@
 ---
-import Button from '@/components/Button.astro';
 import FaqItem from '@/components/FaqItem.astro';
 import HandFrame from '@/components/HandFrame.astro';
 import HandRule from '@/components/HandRule.astro';
@@ -27,22 +26,37 @@ const pageLinks = [...sections, regions];
         </HandFrame>
     </SplitHero>
 
-    <Section tone="light" spacing="compact" class="pt-0 md:pt-0">
-        <nav aria-label="On this page">
-            <p class="eyebrow mb-2">{trustCenter.heading}</p>
-            <ul class="flex flex-wrap gap-x-8">
+    <!--
+        Section links stay pinned just below the site header while reading, with the section
+        in view underlined. It sits directly in <main> so it can stay pinned down the whole page.
+    -->
+    <nav
+        aria-label="On this page"
+        class="trust-subnav sticky z-30 border-b border-navy/15 bg-ivory-light/95 backdrop-blur-sm"
+        data-trust-subnav
+    >
+        <div class="wrap flex items-center gap-x-8 overflow-x-auto whitespace-nowrap">
+            <p class="eyebrow hidden shrink-0 md:block">{trustCenter.heading}</p>
+            <ul class="flex gap-x-6 md:gap-x-8">
                 {
                     pageLinks.map((link) => (
                         <li>
-                            <Button href={`#${link.id}`} variant="text">
+                            <a
+                                href={`#${link.id}`}
+                                class="inline-flex min-h-12 items-center font-medium underline-offset-[6px] hover:underline aria-[current=location]:underline aria-[current=location]:decoration-coral aria-[current=location]:decoration-2"
+                                data-subnav-link
+                            >
                                 {link.label}
-                            </Button>
+                            </a>
                         </li>
                     ))
                 }
             </ul>
-        </nav>
-        <div class="mt-8 max-w-[44rem] border-l-4 border-sunshine pl-5">
+        </div>
+    </nav>
+
+    <Section tone="light" spacing="compact">
+        <div class="max-w-[44rem] border-l-4 border-sunshine pl-5">
             <p class="text-sm font-medium">{hero.lastUpdated}</p>
             <p class="mt-2">{hero.notice}</p>
         </div>
@@ -50,7 +64,7 @@ const pageLinks = [...sections, regions];
 
     {
         sections.map((section, sectionIndex) => (
-            <Section tone={sectionIndex % 2 === 0 ? 'warm' : 'light'} id={section.id} class="scroll-mt-20">
+            <Section tone={sectionIndex % 2 === 0 ? 'warm' : 'light'} id={section.id} class="trust-anchor">
                 <div class="grid gap-10 lg:grid-cols-[4fr_8fr] lg:gap-16">
                     <TextBlock eyebrow={section.label} heading={section.heading} paragraphs={section.intro} />
                     <div class="relative">
@@ -64,7 +78,7 @@ const pageLinks = [...sections, regions];
         ))
     }
 
-    <Section tone={sections.length % 2 === 0 ? 'warm' : 'light'} id={regions.id} class="scroll-mt-20">
+    <Section tone={sections.length % 2 === 0 ? 'warm' : 'light'} id={regions.id} class="trust-anchor">
         <TextBlock eyebrow={regions.label} heading={regions.heading} paragraphs={[regions.intro]} class="max-w-[44rem]" />
 
         <div class="mt-10" data-region-picker>
@@ -136,6 +150,63 @@ const pageLinks = [...sections, regions];
 </BaseLayout>
 
 <script>
+    // Keep the section bar just below the site header, whatever height the header is.
+    const header = document.querySelector<HTMLElement>('[data-header]');
+    if (header) {
+        const setHeaderHeight = () =>
+            document.documentElement.style.setProperty('--header-h', `${header.offsetHeight}px`);
+        new ResizeObserver(setHeaderHeight).observe(header);
+        setHeaderHeight();
+    }
+
+    // Underline the link for the section currently being read.
+    const subnavLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-subnav-link]')];
+    const subnavTargets = subnavLinks
+        .map((link) => document.getElementById(link.hash.slice(1)))
+        .filter((section): section is HTMLElement => section !== null);
+
+    const subnavScroller = document.querySelector<HTMLElement>('[data-trust-subnav] .wrap');
+    let currentId: string | undefined;
+
+    const setCurrent = () => {
+        // The current section is the last one whose top has passed a line a third of the way down.
+        const line = window.innerHeight / 3;
+        let current: HTMLElement | undefined;
+        for (const section of subnavTargets) {
+            if (section.getBoundingClientRect().top <= line) {
+                current = section;
+            }
+        }
+        if (current?.id === currentId) {
+            return;
+        }
+        currentId = current?.id;
+        for (const link of subnavLinks) {
+            if (currentId !== undefined && link.hash === `#${currentId}`) {
+                link.setAttribute('aria-current', 'location');
+                // On narrow screens, slide the bar sideways so the current link is in view.
+                // (scrollIntoView would also interrupt the page's own smooth scrolling.)
+                if (subnavScroller) {
+                    const left = link.offsetLeft - subnavScroller.offsetLeft;
+                    subnavScroller.scrollTo({ left: Math.max(0, left - 20), behavior: 'smooth' });
+                }
+            } else {
+                link.removeAttribute('aria-current');
+            }
+        }
+    };
+
+    let frame = 0;
+    window.addEventListener(
+        'scroll',
+        () => {
+            cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(setCurrent);
+        },
+        { passive: true },
+    );
+    setCurrent();
+
     // Without JavaScript every region is shown in turn; with it, one region shows at a time (UK first).
     for (const picker of document.querySelectorAll<HTMLElement>('[data-region-picker]')) {
         const tabList = picker.querySelector<HTMLElement>('[data-region-tabs]');

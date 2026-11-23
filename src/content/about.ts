@@ -4,6 +4,7 @@
 import type { ImageMetadata } from 'astro';
 import joaoPhoto from '@/assets/team/joao.jpg';
 import laurenPhoto from '@/assets/team/lauren.jpg';
+import paulPhoto from '@/assets/team/paul.jpg';
 import { mailto, routes } from './site';
 
 export interface TeamMember {
@@ -57,7 +58,7 @@ export const about = {
         members: [
             { name: 'Lauren', role: 'Role to come', bio: 'Bio to come.', photo: laurenPhoto },
             { name: 'João', role: 'Role to come', bio: 'Bio to come.', photo: joaoPhoto },
-            { name: 'Paul', role: 'Role to come', bio: 'Bio to come.' },
+            { name: 'Paul', role: 'Role to come', bio: 'Bio to come.', photo: paulPhoto },
             { name: 'Maile', role: 'UI/UX designer', bio: 'Bio to come.' },
         ] as TeamMember[],
     },

@@ -2,6 +2,8 @@
  * About page copy — originally from JE_Website_02_About_Copy_v01.
  */
 import type { ImageMetadata } from 'astro';
+import joaoPhoto from '@/assets/team/joao.jpg';
+import laurenPhoto from '@/assets/team/lauren.jpg';
 import { mailto, routes } from './site';
 
 export interface TeamMember {
@@ -53,8 +55,8 @@ export const about = {
          * PLACEHOLDERS: roles and bios marked "to come" are waiting on copy from the team.
          */
         members: [
-            { name: 'Lauren', role: 'Role to come', bio: 'Bio to come.' },
-            { name: 'João', role: 'Role to come', bio: 'Bio to come.' },
+            { name: 'Lauren', role: 'Role to come', bio: 'Bio to come.', photo: laurenPhoto },
+            { name: 'João', role: 'Role to come', bio: 'Bio to come.', photo: joaoPhoto },
             { name: 'Paul', role: 'Role to come', bio: 'Bio to come.' },
             { name: 'Maile', role: 'UI/UX designer', bio: 'Bio to come.' },
         ] as TeamMember[],

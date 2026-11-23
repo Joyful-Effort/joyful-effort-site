@@ -4,6 +4,7 @@ import Illustration from '@/components/Illustration.astro';
 import Section from '@/components/Section.astro';
 import SplitHero from '@/components/SplitHero.astro';
 import StoryRow from '@/components/StoryRow.astro';
+import TeamMember from '@/components/TeamMember.astro';
 import TextBlock from '@/components/TextBlock.astro';
 import { about } from '@/content/about';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -42,15 +43,14 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
     <Section tone="light">
         <p class="eyebrow">{about.peopleLabel}</p>
-        <div class="mt-8 grid gap-12 md:grid-cols-2 md:gap-16" data-reveal-group>
-            <div class="flex flex-col gap-6">
-                <Illustration name="volunteers" class="w-28 md:w-32" />
-                <TextBlock heading={about.team.heading} paragraphs={about.team.paragraphs} />
-            </div>
-            <div class="flex flex-col gap-6">
-                <Illustration name="meditation" class="w-28 md:w-32" />
-                <TextBlock heading={about.centers.heading} paragraphs={about.centers.paragraphs} />
-            </div>
+        <TextBlock heading={about.team.heading} paragraphs={about.team.paragraphs} class="mt-4 max-w-[44rem]" />
+        <div class="mt-10 grid gap-12 sm:grid-cols-2 md:mt-14 lg:grid-cols-4 lg:gap-x-10" data-reveal-group>
+            {about.team.members.map((member, index) => <TeamMember member={member} variant={index} />)}
+        </div>
+
+        <div class="mt-20 grid items-center gap-8 md:mt-24 md:grid-cols-[auto_1fr] md:gap-12">
+            <Illustration name="meditation" class="w-28 md:w-36" />
+            <TextBlock heading={about.centers.heading} paragraphs={about.centers.paragraphs} class="max-w-[44rem]" />
         </div>
     </Section>
 

@@ -1,7 +1,18 @@
 /**
  * About page copy — originally from JE_Website_02_About_Copy_v01.
  */
+import type { ImageMetadata } from 'astro';
+import joaoPhoto from '@/assets/team/joao.jpg';
+import laurenPhoto from '@/assets/team/lauren.jpg';
+import paulPhoto from '@/assets/team/paul.jpg';
 import { mailto, routes } from './site';
+
+export interface TeamMember {
+    name: string;
+    role: string;
+    bio: string;
+    photo?: ImageMetadata;
+}
 
 export const about = {
     hero: {
@@ -37,8 +48,19 @@ export const about = {
     team: {
         heading: 'Meet the team',
         paragraphs: [
-            'Joyful Effort brings together Mindful Design and Meta Provide in collaboration with Dharma centers. Full team profiles are coming soon.',
+            'Joyful Effort brings together Mindful Design and Meta Provide in collaboration with Dharma centers.',
         ],
+        /**
+         * One entry per person, shown in this order. `photo` is an import from src/assets/team/;
+         * without one, the frame shows the person's initial.
+         * PLACEHOLDERS: roles and bios marked "to come" are waiting on copy from the team.
+         */
+        members: [
+            { name: 'Lauren', role: 'Role to come', bio: 'Bio to come.', photo: laurenPhoto },
+            { name: 'João', role: 'Role to come', bio: 'Bio to come.', photo: joaoPhoto },
+            { name: 'Paul', role: 'Role to come', bio: 'Bio to come.', photo: paulPhoto },
+            { name: 'Maile', role: 'UI/UX designer', bio: 'Bio to come.' },
+        ] as TeamMember[],
     },
     centers: {
         heading: 'Centers helping shape Joyma',

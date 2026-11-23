@@ -1,0 +1,42 @@
+---
+/**
+ * One person in "Meet the team": a hand-framed square photo (or their initial until a
+ * headshot is added), then name, role and a short bio.
+ */
+import { Image } from 'astro:assets';
+import type { TeamMember } from '@/content/about';
+import HandFrame from './HandFrame.astro';
+
+interface Props {
+    member: TeamMember;
+    variant?: number;
+}
+
+const { member, variant = 0 } = Astro.props;
+---
+
+<article class="flex flex-col">
+    <HandFrame variant={variant} offset class="bg-ivory-light">
+        <div class="aspect-square overflow-hidden">
+            {
+                member.photo ? (
+                    <Image
+                        src={member.photo}
+                        alt=""
+                        width={480}
+                        widths={[240, 480]}
+                        sizes="(min-width: 1024px) 15rem, (min-width: 640px) 45vw, 90vw"
+                        class="h-full w-full object-cover"
+                    />
+                ) : (
+                    <div class="flex h-full w-full items-center justify-center" aria-hidden="true">
+                        <span class="text-6xl font-semibold md:text-7xl">{member.name.charAt(0)}</span>
+                    </div>
+                )
+            }
+        </div>
+    </HandFrame>
+    <h3 class="h3 mt-7">{member.name}</h3>
+    <p class="eyebrow mt-2">{member.role}</p>
+    <p class="mt-4">{member.bio}</p>
+</article>

@@ -2,7 +2,12 @@
 import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 import '@fontsource/dm-sans/600.css';
-import { framePaths, horizontalRulePaths, verticalRulePaths } from '../lib/hand-paths';
+import {
+    frameFillPath,
+    framePaths,
+    horizontalRulePaths,
+    verticalRulePaths,
+} from '../lib/hand-paths';
 import { MEETING, sessionViews } from '../lib/seeds-meetings';
 
 /**
@@ -24,6 +29,13 @@ const svgImage = (viewBox: string, paths: string, width: number) =>
 const handImages = [
     ...framePaths.map(
         (d, i) => `--hand-frame-${i}:${svgImage('-1.5 -1.5 103 103', `<path d="${d}"/>`, 2)}`,
+    ),
+    // The same frames as filled outlines, used as masks so a framed box's color stays inside its strokes.
+    ...framePaths.map(
+        (d, i) =>
+            `--hand-fill-${i}:url("data:image/svg+xml,${encodeURIComponent(
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1.5 -1.5 103 103" preserveAspectRatio="none"><path d="${frameFillPath(d)}"/></svg>`,
+            )}")`,
     ),
     ...horizontalRulePaths.map(
         (d, i) => `--hand-rule-h-${i}:${svgImage('0 -1 100 4', `<path d="${d}"/>`, 1.75)}`,
@@ -86,7 +98,18 @@ const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[se
 
   /* ============ hand-drawn frames and rules ============ */
   /* A frame sits just outside its box, so the strokes overshoot the corners as on the main site. */
-  .card,.tablebox,.callout,.next,.addcal-menu,.grid.g2{position:relative}
+  .card,.tablebox,.callout,.next,.addcal-menu,.grid.g2{position:relative;isolation:isolate}
+  /*
+   * A framed box sets its color as --surface rather than a background: the color is painted through the
+   * frame's filled outline (--hand-fill-*), so its edges follow the hand-drawn strokes instead of showing
+   * a straight rectangle edge beside them on a contrasting band.
+   */
+  .card::before,.tablebox::before,.callout::before,.next::before,.addcal-menu::before,.grid.g2::before{
+    content:"";position:absolute;inset:-1.5%;z-index:-1;pointer-events:none;background:var(--surface,transparent);
+    -webkit-mask:var(--hand-fill-0) 0 0/100% 100% no-repeat;mask:var(--hand-fill-0) 0 0/100% 100% no-repeat;
+  }
+  .tablebox::before,.next::before{-webkit-mask-image:var(--hand-fill-1);mask-image:var(--hand-fill-1)}
+  .callout::before,.addcal-menu::before,.grid.g2::before{-webkit-mask-image:var(--hand-fill-2);mask-image:var(--hand-fill-2)}
   .card::after,.tablebox::after,.callout::after,.next::after,.addcal-menu::after,.grid.g2::after{
     content:"";position:absolute;inset:-1.5%;pointer-events:none;
     background:var(--hand-frame-0) 0 0/100% 100% no-repeat;
@@ -164,7 +187,7 @@ const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[se
   .grid{display:grid;gap:24px}
   .g2{grid-template-columns:repeat(2,1fr)}
   .g3{grid-template-columns:repeat(3,1fr)}
-  .card{background:var(--ivory);display:flex;flex-direction:column}
+  .card{--surface:var(--ivory);display:flex;flex-direction:column}
   .card .body{padding:28px 30px;display:flex;flex-direction:column;flex:1}
   .card h3{
     font-size:21px;font-weight:600;color:var(--foreground);
@@ -177,13 +200,13 @@ const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[se
   .card p{font-size:15.5px;color:var(--text-muted)}
   .card p + p{margin-top:10px}
   .card p strong{color:var(--foreground);font-weight:600}
-  .card.sand{background:var(--sunshine)}
+  .card.sand{--surface:var(--sunshine)}
   .card.sand p{color:var(--secondary-foreground)}
 
   /* ============ hand-ruled grids (session and contact cards), like the main site's footer ============ */
-  .grid.g2{gap:0;background:var(--ivory)}
-  .grid.g2 > .card{background:none}
-  .grid.g2 > .card::before,.grid.g2 > .card::after{content:"";position:absolute;pointer-events:none;inset:auto;display:none}
+  .grid.g2{gap:0;--surface:var(--ivory)}
+  .grid.g2 > .card{--surface:transparent;isolation:auto}
+  .grid.g2 > .card::before,.grid.g2 > .card::after{content:"";position:absolute;pointer-events:none;inset:auto;z-index:auto;-webkit-mask:none;mask:none;display:none}
   .grid.g2 > .card::after{left:0;top:-2px;width:100%;height:4px;background:var(--hand-rule-h-0) 0 0/100% 100% no-repeat}
   .grid.g2 > .card:nth-child(4n+1)::after,.grid.g2 > .card:nth-child(4n+2)::after{background-image:var(--hand-rule-h-1)}
   .grid.g2 > .card::before{left:-2px;top:0;width:4px;height:100%;background:var(--hand-rule-v-0) 0 0/100% 100% no-repeat}
@@ -249,7 +272,7 @@ const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[se
   .meet-join{margin:18px 0 32px}
 
   /* ============ next meeting, top of the hero ============ */
-  .next{background:var(--ivory);padding:28px 30px;margin:0 0 32px;max-width:980px}
+  .next{--surface:var(--ivory);padding:28px 30px;margin:0 0 32px;max-width:980px}
   .next-eyebrow{color:var(--secondary-foreground);margin-bottom:8px}
   .next-date{font-size:clamp(24px,3.2vw,32px);font-weight:600;letter-spacing:-.015em;line-height:1.15;color:var(--foreground);margin-bottom:16px}
   .next .actions{margin-top:20px}
@@ -262,7 +285,7 @@ const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[se
   .addcal[open] summary .chev{transform:rotate(180deg)}
   .addcal-menu{
     position:absolute;left:0;top:calc(100% + 8px);z-index:5;min-width:270px;
-    background:var(--ivory);padding:8px;display:flex;flex-direction:column;
+    --surface:var(--ivory);padding:8px;display:flex;flex-direction:column;
   }
   .addcal-menu a{
     display:block;text-decoration:none;color:var(--foreground);font-size:15px;font-weight:500;
@@ -282,7 +305,7 @@ const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[se
   .kinds strong{color:var(--foreground);font-weight:600}
 
   /* ============ tables: framed, with hand-drawn lines between rows ============ */
-  .tablebox{background:var(--ivory)}
+  .tablebox{--surface:var(--ivory)}
   .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
   table{width:100%;border-collapse:collapse;font-size:15.5px}
   th{text-align:left;color:var(--secondary-foreground);padding:18px 22px 14px;white-space:nowrap}
@@ -298,7 +321,7 @@ const usualTimes = (sessions.find((s) => s.number === nextNumber) ?? sessions[se
   }
 
   /* ============ callouts ============ */
-  .callout{padding:18px 22px;font-size:15.5px;margin-top:28px;background:var(--ivory);color:var(--secondary-foreground)}
+  .callout{padding:18px 22px;font-size:15.5px;margin-top:28px;--surface:var(--ivory);color:var(--secondary-foreground)}
   .callout a{color:inherit;text-decoration:underline;text-underline-offset:3px}
   .callout strong{font-weight:600}
   .note{margin-top:16px;font-size:15.5px;color:var(--text-muted);max-width:80ch}

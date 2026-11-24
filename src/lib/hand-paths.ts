@@ -30,3 +30,34 @@ export const verticalRulePaths = [
 export function pick<T>(paths: readonly T[], variant: number): T {
     return paths[Math.abs(variant) % paths.length] as T;
 }
+
+/**
+ * A closed, fillable outline that follows a frame path's four strokes, so a framed surface can be
+ * painted inside the hand-drawn lines instead of as a plain rectangle the strokes wobble across.
+ * The strokes run top (left to right), right (top to bottom), bottom (right to left) and left
+ * (bottom to top); each corner takes the vertical stroke's x and the horizontal stroke's y, which
+ * trims the overshooting stroke ends while the curves themselves are kept.
+ */
+export function frameFillPath(framePath: string): string {
+    const [top, right, bottom, left] = framePath
+        .split('M')
+        .filter((segment) => segment.trim() !== '')
+        .map((segment) => (segment.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number));
+
+    if (!top || !right || !bottom || !left) {
+        throw new Error('A frame path needs four strokes.');
+    }
+
+    const point = (x: number | undefined, y: number | undefined): string => `${x} ${y}`;
+    const controls = (stroke: number[]): string =>
+        `${point(stroke[2], stroke[3])}, ${point(stroke[4], stroke[5])}`;
+
+    return [
+        `M${point(left[6], top[1])}`,
+        `C ${controls(top)}, ${point(right[0], top[7])}`,
+        `C ${controls(right)}, ${point(right[6], bottom[1])}`,
+        `C ${controls(bottom)}, ${point(left[0], bottom[7])}`,
+        `C ${controls(left)}, ${point(left[6], top[1])}`,
+        'Z',
+    ].join(' ');
+}
